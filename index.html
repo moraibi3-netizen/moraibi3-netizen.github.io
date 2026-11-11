@@ -1,0 +1,4548 @@
+<!doctype html>
+<html lang="ja" data-hatch-color-scheme="light" data-hatch-accent="blue"><head>
+    <meta charset="utf-8"><script data-hatch-cvm-opaque-url-compat="" nonce="">(function(){var WINDOW=window;var HREF=WINDOW.location&&WINDOW.location.href;if(typeof HREF!=="string"||HREF.indexOf("blob:null/")!==0)return;var NATIVE_URL=WINDOW.URL;var NATIVE_REFLECT=WINDOW.Reflect;var SYNTHETIC_ORIGIN="https://hatch-cvm.invalid";WINDOW.URL=new Proxy(NATIVE_URL,{construct:function(target,args){if(args.length>1){var base=args[1];var baseValue=typeof base==="string"?base:base&&typeof base.href==="string"?base.href:String(base);if(baseValue.indexOf("null/")===0){var syntheticBase=new NATIVE_URL(SYNTHETIC_ORIGIN+"/"+baseValue.slice(5));var resolved=new NATIVE_URL(args[0],syntheticBase);return {href:"null"+resolved.pathname+resolved.search+resolved.hash};}}return NATIVE_REFLECT.construct(target,args);}});})();</script><script data-hatch-cvm-bridge="" nonce="">(function(){var TOKEN="bb849c05-2289-4738-862c-426730f17683";var PORT=null;var POST=null;var CLOSE=null;var RECEIVERS=new WeakMap();var ADD=window.addEventListener.bind(window);var REMOVE=window.removeEventListener.bind(window);var DISPATCH=window.dispatchEvent.bind(window);var APPLY=Reflect.apply;var WEAK_GET=WeakMap.prototype.get;var WEAK_SET=WeakMap.prototype.set;var STOP=window.Event.prototype.stopImmediatePropagation;var PREVENT=window.Event.prototype.preventDefault;var ASSIGN=Object.assign;var DEFINE=Object.defineProperty;var ERROR=Error;var STRING=String;var MESSAGE_EVENT=window.MessageEvent;var SIGNALS=Object.create(null);var SIGNAL_COUNT=0;var CONSOLE_ROWS=0;var CONSOLE_COUNTS=Object.create(null);var PENDING=[];var DELIVERY_EVENT=null;var DELIVERY_CONSUMED=false;var DELIVERY_FAILED=false;var DELIVERY_ERROR;var receiver=function(listener){var wrapped=APPLY(WEAK_GET,RECEIVERS,[listener]);if(wrapped)return wrapped;wrapped=function(event){try{if(typeof listener==="function")return APPLY(listener,window,[event]);if(listener&&typeof listener.handleEvent==="function")return listener.handleEvent(event);}catch(listenerError){if(event!==DELIVERY_EVENT)throw listenerError;if(DELIVERY_CONSUMED){DELIVERY_FAILED=true;DELIVERY_ERROR=listenerError;}}};APPLY(WEAK_SET,RECEIVERS,[listener,wrapped]);return wrapped;};window.addEventListener=function(type,listener,options){if(type!=="message"||listener==null)return ADD(type,listener,options);return ADD(type,receiver(listener),options);};window.removeEventListener=function(type,listener,options){if(type!=="message"||listener==null)return REMOVE(type,listener,options);var wrapped=APPLY(WEAK_GET,RECEIVERS,[listener]);return REMOVE(type,wrapped||listener,options);};var reply=function(data){var message=ASSIGN({bridgeToken:TOKEN},data);if(POST!==null){POST(message);return;}if(PENDING.length<14)PENDING.push(message);};var reportSignal=function(signal,resourceKind,consoleErrorKind,consoleErrorCount){var key=signal==="console_error"?signal+":"+consoleErrorKind+":"+consoleErrorCount:signal;if(SIGNAL_COUNT>=12||SIGNALS[key]||(signal==="console_error"&&CONSOLE_ROWS>=8))return;SIGNALS[key]=true;SIGNAL_COUNT+=1;if(signal==="console_error")CONSOLE_ROWS+=1;var message={type:"cvm-bridge:runtime-signal",protocol:1,signal:signal};if(resourceKind)message.resourceKind=resourceKind;if(consoleErrorKind){message.consoleErrorKind=consoleErrorKind;message.consoleErrorCount=consoleErrorCount;}reply(message);};var consoleKind=function(args){if(args.length===0)return "no_arguments";var kind=typeof args[0];if(kind==="string"||kind==="object"||kind==="function")return kind;if(kind==="number"||kind==="boolean"||kind==="bigint"||kind==="symbol"||kind==="undefined")return "primitive";return "other";};var CONSOLE=window.console;var CONSOLE_ERROR=CONSOLE&&CONSOLE.error;if(typeof CONSOLE_ERROR==="function"){try{CONSOLE.error=function(){try{var kind=consoleKind(arguments);var count=(CONSOLE_COUNTS[kind]||0)+1;CONSOLE_COUNTS[kind]=count;if(count===1||count===2||count===4||count===8||count===16||count===32)reportSignal("console_error",null,kind,count);}catch{}return APPLY(CONSOLE_ERROR,CONSOLE,arguments);};}catch{}}var resourceKind=function(target){var tag=target&&target.nodeName;if(tag==="SCRIPT")return "script";if(tag==="LINK")return target.rel&&STRING(target.rel).toLowerCase().split(/\s+/).includes("stylesheet")?"stylesheet":"other";if(tag==="IMG")return "image";if(tag==="AUDIO"||tag==="VIDEO"||tag==="SOURCE"||tag==="TRACK")return "media";if(tag==="IFRAME"||tag==="FRAME")return "frame";return "other";};var reportParsed=function(){reply({type:"cvm-bridge:document-loaded"});};var reportLoaded=function(){reportSignal("document_loaded");};ADD("pagehide",function(){reply({type:"cvm-bridge:document-unloading"});},{capture:true,once:true});ADD("error",function(runtimeErrorEvent){var target=runtimeErrorEvent.target;if(target&&target!==window&&target!==document)reportSignal("resource_load_error",resourceKind(target));else reportSignal("uncaught_exception");},true);ADD("unhandledrejection",function(){reportSignal("unhandled_rejection");});var LOCATION=window.location;var URL_CONSTRUCTOR=window.URL;var GET_ELEMENT_BY_ID=window.Document.prototype.getElementById;var GET_ELEMENTS_BY_TAG_NAME=window.Document.prototype.getElementsByTagName;var scrollToFragment=function(fragment){if(!fragment)return;var decoded=fragment;try{decoded=decodeURIComponent(fragment);}catch{}var target=APPLY(GET_ELEMENT_BY_ID,document,[fragment])||APPLY(GET_ELEMENT_BY_ID,document,[decoded]);if(!target){var anchors=APPLY(GET_ELEMENTS_BY_TAG_NAME,document,["a"]);for(var anchorIndex=0;anchorIndex<anchors.length&&!target;anchorIndex+=1){var anchorName=anchors[anchorIndex].getAttribute("name");if(anchorName===fragment||anchorName===decoded)target=anchors[anchorIndex];}}if(target){if(typeof target.scrollIntoView==="function")target.scrollIntoView();}else if(decoded.toLowerCase()==="top")window.scrollTo(0,0);};var parseUrl=function(value){if(typeof value!=="string")return null;try{return new URL_CONSTRUCTOR(value,document.baseURI);}catch{return null;}};var withoutFragment=function(href){var hashIndex=href.indexOf("#");return hashIndex===-1?href:href.slice(0,hashIndex);};var targetsThisFrame=function(target){if(target===null){var base=document.querySelector("base[target]");target=base?base.getAttribute("target"):"";}target=STRING(target).trim().toLowerCase();return target===""||target==="_self";};ADD("click",function(clickEvent){if(clickEvent.defaultPrevented||clickEvent.button!==0||clickEvent.metaKey||clickEvent.ctrlKey||clickEvent.shiftKey||clickEvent.altKey)return;var path=clickEvent.composedPath();var link=null;for(var pathIndex=0;pathIndex<path.length&&link===null;pathIndex+=1){var node=path[pathIndex];if(node&&typeof node.matches==="function"&&node.matches("a,area"))link=node;}if(link===null||!(link.hasAttribute("href")||link.hasAttribute("xlink:href"))||link.hasAttribute("download")||!targetsThisFrame(link.getAttribute("target")))return;var href=link.href;if(typeof href!=="string")href=href&&href.baseVal;var destination=parseUrl(href);if(destination!==null&&destination.protocol==="javascript:")return;APPLY(PREVENT,clickEvent,[]);if(destination!==null&&destination.href.indexOf("#")!==-1&&withoutFragment(destination.href)===withoutFragment(LOCATION.href))scrollToFragment(destination.hash.slice(1));});ADD("submit",function(submitEvent){var form=submitEvent.target;var submitter=submitEvent.submitter;if(submitEvent.defaultPrevented||!form||form.nodeName!=="FORM")return;var formValue=function(submitterName,formName){return submitter&&submitter.hasAttribute(submitterName)?submitter.getAttribute(submitterName):form.getAttribute(formName);};if(STRING(formValue("formmethod","method")||"").trim().toLowerCase()==="dialog"||!targetsThisFrame(formValue("formtarget","target")))return;var destination=parseUrl(formValue("formaction","action")||LOCATION.href);if(destination!==null&&destination.protocol==="javascript:")return;APPLY(PREVENT,submitEvent,[]);});ADD("message",function(messageEvent){var data=messageEvent.data;if(messageEvent.source!==parent||!data||typeof data!=="object"||data.bridgeToken!==TOKEN)return;if(data.type==="cvm-inner:install-bridge"&&PORT===null){APPLY(STOP,messageEvent,[]);var bridgePort=messageEvent.ports&&messageEvent.ports[0];if(!bridgePort)return;PORT=bridgePort;POST=PORT.postMessage.bind(PORT);CLOSE=PORT.close;for(var pendingIndex=0;pendingIndex<PENDING.length;pendingIndex+=1)POST(PENDING[pendingIndex]);PENDING.length=0;PORT.onmessage=function(portEvent){var portData=portEvent.data;if(!portData||typeof portData!=="object"||portData.bridgeToken!==TOKEN)return;if(portData.type!=="cvm-bridge:init-port"||typeof portData.id!=="string")return;var tunnel=portEvent.ports&&portEvent.ports[0];if(!tunnel){reply({type:"cvm-bridge:tunnel-failed",id:portData.id,message:"Missing tunnel port"});return;}var consumed=false;var receiverEvent=new MESSAGE_EVENT("message",{data:{type:"bundle:init-port"},source:null});DEFINE(receiverEvent,"ports",{get:function(){consumed=true;DELIVERY_CONSUMED=true;APPLY(STOP,receiverEvent,[]);return [tunnel];}});try{DELIVERY_EVENT=receiverEvent;DELIVERY_CONSUMED=false;DELIVERY_FAILED=false;DELIVERY_ERROR=undefined;DISPATCH(receiverEvent);DELIVERY_EVENT=null;if(DELIVERY_FAILED)throw DELIVERY_ERROR;if(!consumed)throw new ERROR("Missing bundle tunnel receiver");reply({type:"cvm-bridge:tunnel-ready",id:portData.id});}catch(err){DELIVERY_EVENT=null;try{APPLY(CLOSE,tunnel,[]);}catch{}var errorMessage;try{errorMessage=err&&typeof err==="object"&&typeof err.message==="string"?err.message:STRING(err);}catch{errorMessage="Bundle tunnel receiver failed";}reply({type:"cvm-bridge:tunnel-failed",id:portData.id,message:errorMessage});}};PORT.start();if(document.readyState==="loading")ADD("DOMContentLoaded",reportParsed,{once:true});else reportParsed();if(document.readyState==="complete")reportLoaded();else ADD("load",reportLoaded,{once:true});return;}if(data.type!=="cvm-bridge:confirm-document"||PORT===null||typeof data.id!=="string")return;reply({type:"cvm-bridge:document-confirmed",id:data.id});});ADD("error",function(errorEvent){if(DELIVERY_EVENT===null||!DELIVERY_CONSUMED)return;DELIVERY_FAILED=true;DELIVERY_ERROR=errorEvent.error||new ERROR(errorEvent.message||"Bundle tunnel receiver failed");APPLY(PREVENT,errorEvent,[]);},{capture:true});parent.postMessage({type:"cvm-inner:document-ready",bridgeToken:TOKEN},"*");})();</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#140a24">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="バトルスピリッツ風オリジナルカードを作成する工房（単体版）。保存は端末内のみです。">
+    <link rel="manifest" data-hatch-href="assets/manifest.webmanifest" href="blob:null/8e6fe253-71bf-42ff-97d2-24334d77f2a4">
+    <link rel="icon" type="image/png" sizes="192x192" data-hatch-href="assets/icon-192.png" href="blob:null/64296ec9-231f-46af-92c6-d2c731316014">
+    <link rel="apple-touch-icon" data-hatch-href="assets/icon-192.png" href="blob:null/64296ec9-231f-46af-92c6-d2c731316014">
+    <title>オリカ工房（単体版）</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #140a24;
+        --surface: #1e1036;
+        --surface-2: #281847;
+        --text: #efe9fa;
+        --dim: #b3a6d6;
+        --border: #3a2560;
+        --accent: #d8b26a;
+        --accent-dim: #8f713c;
+        --danger: #e2607a;
+        --radius: 12px;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+      }
+      button, [role="button"], select, summary,
+      input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+      button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+      button:disabled { cursor: default; }
+      .wrap { max-width: 72rem; margin: 0 auto; padding: 1.25rem 1rem 4rem; }
+      h1 {
+        font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", "Noto Serif CJK JP", "Noto Serif JP", serif;
+        font-size: 1.5rem; font-weight: 700; letter-spacing: 0.04em;
+        color: var(--accent); margin: 0;
+      }
+      .lead { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--dim); }
+      .banner {
+        margin: 0 0 1rem; border-radius: var(--radius);
+        border: 1px solid var(--border); background: var(--surface);
+        padding: 0.75rem 1rem; font-size: 0.875rem;
+      }
+      .banner.error { border-color: var(--danger); color: var(--danger); }
+      .banner.error button { font-weight: 700; color: var(--text); margin-left: 0.75rem; min-height: 2rem; }
+      .banner.notice { border-color: var(--accent-dim); color: var(--accent); }
+      .layout { display: grid; gap: 1.5rem; }
+      @media (min-width: 1024px) {
+        .layout { grid-template-columns: minmax(0, 480px) 1fr; align-items: start; }
+        .preview-col { position: sticky; top: 1.25rem; }
+      }
+      .preview-inner { max-width: 440px; margin: 0 auto; }
+      canvas#card-canvas {
+        display: block; width: 100%; height: auto; aspect-ratio: 1406 / 2048;
+        border-radius: 10px; box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+        touch-action: none; background: #100a1a;
+      }
+      .preview-hint { margin: 0.5rem 0 0; text-align: center; font-size: 0.75rem; color: var(--dim); }
+      .panel {
+        border: 1px solid var(--border); border-radius: var(--radius);
+        background: var(--surface); padding: 0.75rem;
+      }
+      .panel + .panel { margin-top: 0.75rem; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+        border-radius: 0.5rem; padding: 0.5rem 1rem; font-weight: 700;
+        transition: transform 0.05s ease;
+      }
+      .btn:active { transform: scale(0.98); }
+      .btn:disabled { opacity: 0.45; }
+      .btn-gold { background: var(--accent); color: #241203; }
+      .btn-outline { border: 1px solid var(--accent); color: var(--accent); }
+      .btn-ghost { border: 1px solid var(--border); color: var(--accent); }
+      .btn-danger { background: var(--danger); color: #fff; }
+      .btn-row { display: flex; gap: 0.5rem; }
+      .btn-row .btn { flex: 1; }
+      .stack { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+      .input {
+        width: 100%; border-radius: 0.5rem; border: 1px solid var(--border);
+        background: var(--surface-2); padding: 0.5rem 0.75rem;
+        font-size: 1rem; color: var(--text); outline: none; font-family: inherit;
+      }
+      .input:focus { border-color: var(--accent); }
+      textarea.input { min-height: 5rem; resize: vertical; }
+      .label { display: block; font-size: 0.875rem; font-weight: 700; color: var(--dim); margin-bottom: 0.25rem; }
+      .label-sm { display: block; font-size: 0.75rem; font-weight: 700; color: var(--dim); margin-bottom: 0.25rem; }
+      fieldset { border: none; margin: 0 0 1.25rem; padding: 0; min-width: 0; }
+      legend.label { padding: 0; }
+      .grid2 { display: grid; gap: 1rem; }
+      @media (min-width: 640px) { .grid2 { grid-template-columns: 1fr 1fr; } .span2 { grid-column: span 2; } }
+      .seg { display: flex; gap: 0.25rem; }
+      .seg button {
+        flex: 1; border: 1px solid var(--border); border-radius: 0.5rem;
+        padding: 0.5rem 0.25rem; font-weight: 700; color: var(--dim); min-height: 2.5rem;
+      }
+      .seg button[aria-pressed="true"] {
+        border-color: var(--accent); background: var(--surface-2); color: var(--accent);
+      }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .chip {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        border: 1px solid var(--border); border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem; font-weight: 700; color: var(--dim); min-height: 2.5rem;
+      }
+      .chip[aria-pressed="true"] { border-color: var(--accent); background: var(--surface-2); color: var(--accent); }
+      .swatch { display: inline-block; width: 1rem; height: 1rem; border-radius: 9999px; border: 1px solid rgba(0,0,0,0.4); }
+      h2 { font-size: 1rem; font-weight: 700; color: var(--text); margin: 0; }
+      .saved-list { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-bottom: 0.25rem; margin: 0; list-style: none; padding-left: 0; }
+      .saved-item {
+        flex-shrink: 0; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--surface);
+      }
+      .saved-item.active { border-color: var(--accent); background: var(--surface-2); }
+      .saved-item .pick { display: block; padding: 0.5rem 0.75rem 0.25rem; text-align: left; width: 100%; }
+      .saved-item .nm { display: block; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.875rem; font-weight: 700; color: var(--text); }
+      .saved-item .meta { display: block; font-size: 0.75rem; color: var(--dim); }
+      .saved-item .del-zone { padding: 0 0.75rem 0.5rem; }
+      .del-link { font-size: 0.75rem; font-weight: 700; color: var(--danger); padding: 0.25rem 0; min-height: 2rem; }
+      .confirm-row { display: flex; align-items: center; gap: 0.5rem; }
+      .confirm-mini {
+        border-radius: 0.375rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; font-weight: 700; min-height: 2rem;
+      }
+      .confirm-mini.danger { background: var(--danger); color: #fff; }
+      .confirm-mini.cancel { border: 1px solid var(--border); color: var(--text); }
+      .confirm-mini:disabled { opacity: 0.5; }
+      .art-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .art-tile {
+        width: 92px; overflow: hidden; border-radius: 0.5rem; border: 2px solid var(--border); background: var(--surface);
+      }
+      .art-tile.selected { border-color: var(--accent); }
+      .art-tile .pick { display: block; width: 100%; padding: 0; }
+      .art-tile img { display: block; width: 100%; height: 6rem; object-fit: cover; }
+      .art-tile .cap { display: block; background: var(--surface); padding: 0.125rem 0.25rem; text-align: center; font-size: 0.75rem; color: var(--text); }
+      .art-tile .del-zone { background: var(--surface); padding: 0 0.25rem 0.25rem; }
+      .art-tile .del-zone .del-link { display: block; width: 100%; text-align: center; }
+      .art-confirm { display: flex; flex-direction: column; gap: 0.25rem; }
+      .upload-tile {
+        display: flex; width: 90px; height: 124px; cursor: pointer; flex-direction: column;
+        align-items: center; justify-content: center; gap: 0.25rem; border-radius: 0.5rem;
+        border: 2px dashed var(--border); padding: 0.5rem; text-align: center; color: var(--dim);
+      }
+      .upload-tile.selected { border-color: var(--accent); color: var(--accent); }
+      .upload-tile .t { font-size: 0.875rem; font-weight: 700; white-space: pre-line; }
+      .none-tile {
+        width: 90px; height: 124px; border-radius: 0.5rem; border: 2px solid var(--border);
+        font-size: 0.875rem; font-weight: 700; color: var(--dim);
+      }
+      .none-tile[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+      .noimg {
+        display: flex; height: 6rem; width: 100%; align-items: center; justify-content: center;
+        background: var(--surface-2); font-size: 0.75rem; color: var(--dim);
+      }
+      .soul-btn {
+        display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 0.25rem;
+        border: 1px solid var(--border); border-radius: 0.375rem; padding: 0.25rem 0.5rem;
+        font-size: 0.75rem; font-weight: 700; color: var(--accent); min-height: 2rem;
+      }
+      .soul-dot {
+        display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 9999px; flex-shrink: 0;
+        background: conic-gradient(#ff6060,#ffb042,#f5e65a,#6edc78,#5aa0ff,#be6eff,#ff6060);
+      }
+      .dyn-grid { display: grid; gap: 0.5rem; }
+      .bp-plus {
+        flex-shrink: 0; border: 1px solid var(--border); border-radius: 0.5rem;
+        padding: 0 0.5rem; font-size: 1.125rem; font-weight: 700; color: var(--dim); min-height: 2.5rem;
+      }
+      .bp-plus[aria-pressed="true"] { border-color: var(--accent); background: var(--surface-2); color: var(--accent); }
+      .bp-row { display: flex; gap: 0.25rem; }
+      .bp-row .input { min-width: 0; }
+      .effect-card { border: 1px solid var(--border); border-radius: 0.5rem; background: var(--surface); padding: 0.75rem; }
+      .effect-card + .effect-card { margin-top: 0.75rem; }
+      .effect-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+      .effect-head .t { font-size: 0.875rem; font-weight: 700; }
+      .effect-head .del { border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; font-weight: 700; color: var(--danger); min-height: 2rem; }
+      input[type="range"] { width: 100%; accent-color: var(--accent); min-height: 2.25rem; }
+      .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+      .dim { color: var(--dim); }
+      .small { font-size: 0.875rem; }
+      .xs { font-size: 0.75rem; }
+      .mt { margin-top: 1.25rem; }
+      .delete-zone { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+      .pwa-box { margin-top: 2.5rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem; }
+      .pwa-box h2 { color: var(--accent); margin-bottom: 0.5rem; }
+      .pwa-box ol { margin: 0.5rem 0; padding-left: 1.25rem; }
+      .pwa-box li { margin: 0.25rem 0; }
+      .folder { margin-top: 2rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1rem; }
+      .folder .section-head { flex-wrap: wrap; gap: 0.5rem; }
+      .folder-sort-wrap { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 700; color: var(--dim); }
+      .folder-sort-wrap select { width: auto; min-width: 11rem; }
+      .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+      @media (max-width: 480px) { .folder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      .folder-tile { border: 1px solid var(--border); border-radius: 0.5rem; background: var(--surface-2); overflow: hidden; }
+      .folder-tile.active { border-color: var(--accent); }
+      .folder-tile .pick { display: block; width: 100%; padding: 0; text-align: left; }
+      .folder-tile .thumb { display: block; width: 100%; aspect-ratio: 1406 / 2048; object-fit: cover; background: #100a1a; }
+      .folder-tile .thumb-ph { display: flex; width: 100%; aspect-ratio: 1406 / 2048; align-items: center; justify-content: center; background: #100a1a; font-size: 0.75rem; color: var(--dim); }
+      .folder-tile .info { display: block; padding: 0.5rem 0.75rem 0.25rem; }
+      .folder-tile .nm { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.875rem; font-weight: 700; color: var(--text); }
+      .folder-tile .meta { display: block; font-size: 0.75rem; color: var(--dim); }
+      .folder-tile .del-zone { padding: 0 0.75rem 0.5rem; }
+      textarea.flavor-input { min-height: 4.5rem; }
+      textarea.head-input { min-height: 3.25rem; }
+      .sr-only {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+      }
+      [hidden] { display: none !important; }
+    </style>
+    <style data-hatch-cvm-bundle="" nonce=""></style>
+</head>
+  <body>
+    <div class="wrap">
+      <header style="margin-bottom:1.25rem">
+        <h1>オリカ工房（単体版）</h1>
+        <p class="lead">承認済みテンプレート（宝石コスト）でバトルスピリッツ風カードを作成します。種類はスピリット／ブレイヴ／マジック／ネクサス、枠・軽減・シンボルは6色から選べます。カードの保存はこの端末の中だけです。</p>
+      </header>
+
+      <div id="banner-error" class="banner error" role="alert" hidden="">
+        <span id="banner-error-text">端末内データの読み込みに失敗しました: SecurityError: Failed to execute 'open' on 'IDBFactory': access to the Indexed Database API is denied in this context.</span>
+        <button type="button" id="banner-error-close">閉じる</button>
+      </div>
+      <div id="banner-notice" class="banner notice" hidden=""></div>
+      <div id="install-banner" class="banner notice" hidden="">
+        このページはホーム画面に追加できます。
+        <button type="button" id="install-btn" class="btn btn-gold" style="margin-left:0.5rem;padding:0.25rem 0.75rem">ホーム画面に追加</button>
+      </div>
+
+      <div class="layout">
+        <!-- preview -->
+        <section aria-label="カードプレビュー" class="preview-col">
+          <div class="preview-inner">
+            <canvas id="card-canvas" width="2812" height="4096" aria-label="カードのプレビュー。ドラッグでイラストの位置を調整できます"></canvas>
+            <p class="preview-hint" id="preview-hint">イラストを選ぶとここに表示されます</p>
+            <div class="panel" id="crop-panel" hidden="">
+              <label class="label" for="crop-zoom">イラストの拡大率（切り抜き範囲）</label>
+              <input id="crop-zoom" type="range" min="30" max="100" value="100">
+              <button type="button" class="btn btn-ghost" id="crop-reset" style="padding:0.25rem 0.75rem;font-size:0.875rem">全体表示に戻す</button>
+            </div>
+            <div class="stack">
+              <div class="btn-row">
+                <button type="button" class="btn btn-gold" id="btn-png">PNGをダウンロード</button>
+                <button type="button" class="btn btn-outline" id="btn-pdf">PDFで保存</button>
+              </div>
+              <button type="button" class="btn btn-outline" id="btn-save" style="width:100%">カードを保存</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- editor -->
+        <section aria-label="カード編集" style="min-width:0">
+          <div style="margin-bottom:1.5rem">
+            <div class="section-head">
+              <h2>カード編集</h2>
+              <button type="button" class="btn btn-ghost" id="btn-new" style="padding:0.25rem 0.75rem;font-size:0.875rem">＋ 新規作成</button>
+            </div>
+            <p class="small dim" style="margin:0">保存したカードはページ下部の「保存済みカードフォルダ」から開けます。</p>
+          </div>
+
+          <fieldset>
+            <legend class="label">イラスト</legend>
+            <div class="art-row" id="art-row"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="label">カードの色（枠・軽減・シンボル）</legend>
+            <div class="chips" role="group" aria-label="カードの色" id="color-group"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="label">カードの種類</legend>
+            <div class="chips" role="group" aria-label="カードの種類" id="type-group"></div>
+          </fieldset>
+
+          <div class="grid2">
+            <div class="span2">
+              <label class="label" for="f-name">カード名</label>
+              <input id="f-name" class="input" maxlength="60" placeholder="冥薔薇の魔姫 ノクティア">
+            </div>
+            <div>
+              <label class="label" for="f-family">系統</label>
+              <input id="f-family" class="input" maxlength="30" placeholder="絶晶・魔姫">
+            </div>
+            <div>
+              <label class="label" for="f-code">カード番号</label>
+              <input id="f-code" class="input" maxlength="20" placeholder="ORC-X01">
+            </div>
+            <div class="span2">
+              <label class="label" for="f-flavor">フレーバーテキスト（効果文の下に表示・改行可／最大3行）</label>
+              <textarea id="f-flavor" class="input flavor-input" rows="3" maxlength="300" placeholder="薔薇の棘は、眠る街を静かに守り続ける。"></textarea>
+              <button type="button" class="soul-btn" id="btn-soul-flavor" aria-label="フレーバーテキストにソウルコアマークを挿入"><span class="soul-dot" aria-hidden="true"></span>ソウルコアマークを挿入</button>
+            </div>
+            <div>
+              <label class="label" for="f-cost">コスト</label>
+              <input id="f-cost" class="input" type="number" inputmode="numeric" min="0" max="99">
+            </div>
+            <div>
+              <span class="label" id="reduction-label">軽減シンボル数</span>
+              <div class="seg" role="group" aria-labelledby="reduction-label" id="reduction-group"></div>
+            </div>
+            <div>
+              <span class="label" id="symbols-label">シンボルの数</span>
+              <div class="seg" role="group" aria-labelledby="symbols-label" id="symbols-group"></div>
+            </div>
+            <div>
+              <span class="label" id="reduction-color-label">軽減の色（他色軽減）</span>
+              <div class="chips" role="group" aria-labelledby="reduction-color-label" id="reduction-color-group" style="gap:0.25rem"></div>
+            </div>
+          </div>
+
+          <div class="mt">
+            <span class="label" id="levels-label">レベルの数（無いレベルは表示されません）</span>
+            <div class="seg" role="group" aria-labelledby="levels-label" id="levels-group"></div>
+          </div>
+
+          <fieldset class="mt" id="cores-fieldset">
+            <legend class="label">レベルに必要なコア数</legend>
+            <div class="dyn-grid" id="cores-grid" style="grid-template-columns: repeat(3, minmax(0px, 1fr));"></div>
+          </fieldset>
+
+          <div class="mt" id="showbp-wrap">
+            <span class="label" id="showbp-label">BPの表示（ネクサスはBPなし）</span>
+            <div class="seg" role="group" aria-labelledby="showbp-label" id="showbp-group"></div>
+          </div>
+
+          <fieldset class="mt" id="bp-fieldset">
+            <legend class="label">BP（＋ボタンで数字の前に＋を付けられます）</legend>
+            <div class="dyn-grid" id="bp-grid" style="grid-template-columns: repeat(3, minmax(0px, 1fr));"></div>
+          </fieldset>
+
+          <fieldset class="mt">
+            <legend class="label">効果文</legend>
+            <div id="effects-list"></div>
+            <button type="button" class="btn btn-ghost" id="btn-add-effect" style="margin-top:0.5rem;font-size:0.875rem">＋ 効果を追加</button>
+          </fieldset>
+
+          <div class="delete-zone" id="delete-zone" hidden="">
+            <div class="confirm-row" id="delete-confirm" hidden="">
+              <span class="small">このカードを削除しますか？</span>
+              <button type="button" class="btn btn-danger" id="btn-delete-yes" style="padding:0.25rem 0.75rem">削除する</button>
+              <button type="button" class="btn btn-ghost" id="btn-delete-no" style="padding:0.25rem 0.75rem;font-size:0.875rem">やめる</button>
+            </div>
+            <button type="button" id="btn-delete" class="small" style="font-weight:700;color:var(--danger);min-height:2.25rem">このカードを削除</button>
+          </div>
+        </section>
+      </div>
+
+      <section class="folder" aria-label="保存済みカードフォルダ" id="folder-section">
+        <div class="section-head">
+          <h2>保存済みカードフォルダ</h2>
+          <label class="folder-sort-wrap" for="folder-sort">
+            <span>並び替え</span>
+            <select id="folder-sort" class="input">
+              <option value="updated-desc">更新が新しい順</option>
+              <option value="updated-asc">更新が古い順</option>
+              <option value="color">属性順</option>
+              <option value="cost-asc">コストが小さい順</option>
+              <option value="cost-desc">コストが大きい順</option>
+            </select>
+          </label>
+        </div>
+        <p class="small dim" id="folder-loading">読み込み中…</p>
+        <p class="small dim" id="folder-empty" hidden="">まだカードがありません。カードを作って「カードを保存」を押すと、ここに並びます。</p>
+        <div class="folder-grid" id="folder-grid"></div>
+      </section>
+
+      <section class="pwa-box" aria-label="単体アプリとして使う">
+        <h2>単体アプリとして使う（Android）</h2>
+        <p class="small" style="margin:0">このページはPWA（ホーム画面アプリ）として使えます。単体パッケージをダウンロードして、自分の置き場所（HTTPSで開ける場所やlocalhost）に置けば、Museから完全に切り離して動きます。</p>
+        <ol class="small">
+          <li>下のボタンで単体パッケージ（ZIP）をダウンロードする</li>
+          <li>ZIPを解凍して、中身をそのままHTTPSで開ける場所に置く（GitHub Pagesなどの静的ホスティングでOK）</li>
+          <li>AndroidのChromeでそのURLを開く</li>
+          <li>Chromeのメニュー（︙）から「ホーム画面に追加」または「アプリをインストール」を選ぶ</li>
+          <li>ホーム画面のアイコンから起動すれば、ブラウザの枠なしで使えます。一度開けばオフラインでも動きます</li>
+        </ol>
+        <p class="small dim">置き場所がHTTPS（またはlocalhost）でないと、ホーム画面への追加とオフライン動作は有効になりません。ファイルを直接開く（file://）形ではインストールできません。作成したカードは端末内（このブラウザの保存領域）にだけ保存され、Muse版の工房とは連動しません。ブラウザのデータを消すとカードも消えるので、大事なカードはPNG／PDFでも残してください。</p>
+        <button type="button" class="btn btn-gold" id="btn-package">単体パッケージ（ZIP）をダウンロード</button>
+        <span class="small dim" id="package-note" style="margin-left:0.5rem"></span>
+      </section>
+    </div>
+
+    
+    
+    
+    
+    
+  <script data-hatch-cvm-bundle="" nonce="">(() => {
+  var __defProp = Object.defineProperty;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  function __accessProp(key) {
+    return this[key];
+  }
+  var __toCommonJS = (from) => {
+    var entry = (__moduleCache ??= new WeakMap).get(from), desc;
+    if (entry)
+      return entry;
+    entry = __defProp({}, "__esModule", { value: true });
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (var key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(entry, key))
+          __defProp(entry, key, {
+            get: __accessProp.bind(from, key),
+            enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+          });
+    }
+    __moduleCache.set(from, entry);
+    return entry;
+  };
+  var __moduleCache;
+
+  // src/prelude.ts
+  var exports_prelude = {};
+
+  // src/tunnel-url.ts
+  var B64_CHUNK = 32768;
+  function computeSelfBaseDir(selfHref) {
+    if (!selfHref)
+      return "";
+    let h = selfHref;
+    const hash = h.indexOf("#");
+    if (hash >= 0)
+      h = h.slice(0, hash);
+    const q = h.indexOf("?");
+    if (q >= 0)
+      h = h.slice(0, q);
+    const slash = h.lastIndexOf("/");
+    return slash >= 0 ? h.slice(0, slash + 1) : "";
+  }
+  function isSelfOriginUrl(u, selfBaseDir, selfHref, objectUrls) {
+    if (!selfBaseDir || !u.startsWith(selfBaseDir))
+      return false;
+    if (u === selfHref)
+      return false;
+    return !objectUrls.has(u);
+  }
+  function isExternalUrl(u, selfBaseDir, selfHref, objectUrls) {
+    if (!u)
+      return false;
+    if (u.startsWith("#"))
+      return true;
+    if (isSelfOriginUrl(u, selfBaseDir, selfHref, objectUrls))
+      return false;
+    if (u.startsWith("data:") || u.startsWith("blob:"))
+      return true;
+    if (u.startsWith("about:") || u.startsWith("javascript:"))
+      return true;
+    if (u.startsWith("//"))
+      return true;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(u)) {
+      return true;
+    }
+    return false;
+  }
+  function ownObjectUrl(scriptUrl, objectUrls) {
+    const href = typeof scriptUrl === "string" ? scriptUrl : scriptUrl instanceof URL ? scriptUrl.href : null;
+    return href !== null && href.startsWith("blob:") && objectUrls.has(href) ? href : null;
+  }
+  var WORKER_TUNNEL_SHIM = [
+    "self.__tunnel=self.__tunnel||{",
+    "fetch:function(){return self.fetch.apply(self,arguments)},",
+    "XHR:self.XMLHttpRequest,WebSocket:self.WebSocket,EventSource:self.EventSource,",
+    "Worker:self.Worker,import:function(s){return import(s)},",
+    "Image:function(w,h){return new Image(w,h)},",
+    "sendBeacon:function(){return false},",
+    "getStyle:function(x){if(x==null)return x;try{return x.style}catch(e){return undefined}},",
+    "setStyle:function(x,n,v){x.style[n]=v},",
+    "setUrlProp:function(x,n,v){x[n]=v;return v},",
+    "setAttr:function(x){return x.setAttribute.apply(x,[].slice.call(arguments,1))},",
+    "setAttrNS:function(x){return x.setAttributeNS.apply(x,[].slice.call(arguments,1))},",
+    "setInnerHTML:function(x,v,w){x[w||'innerHTML']=v},",
+    "setStyleText:function(x,v){x.textContent=v},",
+    "insertAdjacentHTML:function(x,p,v){return x.insertAdjacentHTML(p,v)},",
+    `_importMeta:{url:self.location.href}};
+`
+  ].join("");
+  function isWorkerScriptBlob(obj) {
+    return obj instanceof Blob && (obj.type === "" || /javascript|ecmascript/i.test(obj.type));
+  }
+  function workerScriptBlob(script) {
+    return new Blob([WORKER_TUNNEL_SHIM, script], { type: "text/javascript" });
+  }
+  function normalizeToRelPath(u, selfBaseDir) {
+    let s = u;
+    if (selfBaseDir && s.startsWith(selfBaseDir)) {
+      s = s.slice(selfBaseDir.length);
+    }
+    s = s.replace(/^\.\//, "");
+    s = s.replace(/^\/+/, "");
+    return s;
+  }
+  function blobInner(base, NativeURL) {
+    if (base == null)
+      return null;
+    const s = typeof base === "string" ? base : base instanceof NativeURL ? base.href : String(base);
+    return s.startsWith("blob:") ? s.slice("blob:".length) : null;
+  }
+  var OPAQUE_BLOB_ORIGIN = "https://hatch-cvm-opaque.invalid";
+  function isAbsoluteUrlString(s, NativeURL) {
+    try {
+      new NativeURL(s);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  function resolveAgainstBlobBase(u, base, NativeURL) {
+    const inner = blobInner(base, NativeURL);
+    if (inner === null)
+      return null;
+    if (isAbsoluteUrlString(inner, NativeURL)) {
+      return new NativeURL("blob:" + new NativeURL(u, inner).href);
+    }
+    const slash = inner.indexOf("/");
+    const token = slash >= 0 ? inner.slice(0, slash) : inner;
+    const path = slash >= 0 ? inner.slice(slash) : "/";
+    const resolved = new NativeURL(u, OPAQUE_BLOB_ORIGIN + path);
+    return new NativeURL("blob:" + token + resolved.pathname + resolved.search + resolved.hash);
+  }
+  function resolveTunnelUrl(url, base, selfHref, NativeURL) {
+    const u = url == null ? "" : typeof url === "string" ? url : url instanceof NativeURL ? url.href : String(url);
+    const uAbsolute = /^[a-z][a-z0-9+.-]*:/i.test(u) || u.startsWith("//");
+    if (base !== undefined && base !== null && !uAbsolute) {
+      const viaBlob = resolveAgainstBlobBase(u, base, NativeURL);
+      if (viaBlob !== null)
+        return viaBlob;
+      return new NativeURL(u, base);
+    }
+    if (!uAbsolute && selfHref) {
+      const viaBlob = resolveAgainstBlobBase(u, selfHref, NativeURL);
+      if (viaBlob !== null)
+        return viaBlob;
+    }
+    return base === undefined ? new NativeURL(u) : new NativeURL(u, base);
+  }
+  function bytesToBase64(bytes) {
+    const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    let s = "";
+    for (let i = 0;i < u8.length; i += B64_CHUNK) {
+      s += String.fromCharCode.apply(null, Array.from(u8.subarray(i, i + B64_CHUNK)));
+    }
+    return btoa(s);
+  }
+  function base64ToBytes(b64) {
+    const bin = atob(b64);
+    const out = new Uint8Array(bin.length);
+    for (let i = 0;i < bin.length; i++)
+      out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  function importMetaUrl(selfHref, selfBaseDir) {
+    return selfBaseDir ? `${selfBaseDir}assets/cvm-bundle.js` : selfHref;
+  }
+
+  // src/download-links.ts
+  function installDownloadLinks(fetchAsset, isExternalUrl, revokeDelayMs) {
+    document.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        return;
+      const anchor = event.composedPath().find((node) => node instanceof HTMLAnchorElement);
+      if (!anchor?.hasAttribute("download"))
+        return;
+      const href = anchor.getAttribute("href");
+      if (!href || isExternalUrl(href))
+        return;
+      event.preventDefault();
+      const filename = anchor.download || resourceFilename(href);
+      (async () => {
+        const response = await fetchAsset(href);
+        if (!response.ok) {
+          throw new Error(`Artifact download failed: HTTP ${response.status}`);
+        }
+        const url = URL.createObjectURL(await response.blob());
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.hidden = true;
+        document.body.appendChild(link);
+        try {
+          link.click();
+        } finally {
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(url), revokeDelayMs);
+        }
+      })().catch((error) => reportError(error));
+    });
+  }
+  function resourceFilename(href) {
+    const path = new URL(href, document.baseURI).pathname;
+    const name = path.slice(path.lastIndexOf("/") + 1);
+    try {
+      return decodeURIComponent(name);
+    } catch {
+      return name;
+    }
+  }
+
+  // src/fragment-links.ts
+  function installFragmentLinks() {
+    if (!location.href.startsWith("blob:null/"))
+      return;
+    const NativeURL = URL;
+    const pushState = history.pushState.bind(history);
+    const replaceState = history.replaceState.bind(history);
+    window.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        return;
+      const anchor = event.composedPath().find((node) => node instanceof HTMLAnchorElement);
+      if (!anchor || anchor.hasAttribute("download"))
+        return;
+      const targetName = anchor.getAttribute("target") ?? document.querySelector("base[target]")?.getAttribute("target") ?? "";
+      if (targetName !== "" && targetName.toLowerCase() !== "_self")
+        return;
+      const href = anchor.getAttribute("href");
+      if (!href?.startsWith("#"))
+        return;
+      const oldURL = location.href;
+      const nextURL = new NativeURL(href, oldURL);
+      event.preventDefault();
+      const changed = nextURL.href !== oldURL;
+      if (changed) {
+        pushState(null, "", nextURL.href);
+      } else {
+        replaceState(null, "", nextURL.href);
+      }
+      window.dispatchEvent(new PopStateEvent("popstate", { state: null }));
+      const target = fragmentTarget(nextURL.hash);
+      if (target) {
+        target.scrollIntoView();
+        if (target !== document.documentElement && (target instanceof HTMLElement || target instanceof SVGElement)) {
+          const hadTabIndex = target.hasAttribute("tabindex");
+          if (!hadTabIndex)
+            target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+          if (!hadTabIndex)
+            target.removeAttribute("tabindex");
+        }
+      }
+      if (changed) {
+        queueMicrotask(() => window.dispatchEvent(new HashChangeEvent("hashchange", {
+          oldURL,
+          newURL: nextURL.href
+        })));
+      }
+    });
+  }
+  function fragmentTarget(hash) {
+    const bytes = hash.slice(1).replace(/%([0-9a-f]{2})/gi, (_match, hex) => String.fromCharCode(parseInt(hex, 16)));
+    const fragment = new TextDecoder().decode(Uint8Array.from(bytes, (byte) => byte.charCodeAt(0)));
+    if (fragment === "")
+      return document.documentElement;
+    const idTarget = document.getElementById(fragment);
+    if (idTarget)
+      return idTarget;
+    const namedTarget = Array.from(document.getElementsByName(fragment)).find((node) => node instanceof HTMLAnchorElement);
+    return namedTarget ?? (fragment.toLowerCase() === "top" ? document.documentElement : null);
+  }
+
+  // src/prelude.ts
+  (function installTunnel() {
+    installFragmentLinks();
+    let port = null;
+    let portReadyResolve = null;
+    const portReady = new Promise((res) => {
+      portReadyResolve = res;
+    });
+    const pending = new Map;
+    const openWs = new Map;
+    function newId() {
+      return Math.random().toString(36).slice(2) + "-" + Date.now().toString(36);
+    }
+    function bytesToB64(bytes) {
+      return bytesToBase64(bytes);
+    }
+    function b64ToBytes(b64) {
+      return base64ToBytes(b64);
+    }
+    async function httpReq(method, path, body, headers) {
+      const p = port ?? await portReady;
+      const id = newId();
+      const headerArr = [];
+      if (headers) {
+        const h = new Headers(headers);
+        h.forEach((v, k) => headerArr.push([k, v]));
+      }
+      let bodyB64 = "";
+      if (body != null && body !== "") {
+        let bytes;
+        if (typeof body === "string") {
+          bytes = new TextEncoder().encode(body);
+        } else if (body instanceof ArrayBuffer) {
+          bytes = new Uint8Array(body);
+        } else if (body instanceof Uint8Array) {
+          bytes = body;
+        } else if (body instanceof Blob) {
+          bytes = new Uint8Array(await body.arrayBuffer());
+        } else if (body instanceof FormData) {
+          const boundary = "----HatchBoundary" + Math.random().toString(36).slice(2);
+          let s = "";
+          for (const [k, v] of body.entries()) {
+            s += `--${boundary}\r
+Content-Disposition: form-data; name="${k}"`;
+            if (v instanceof File) {
+              s += `; filename="${v.name}"\r
+Content-Type: ${v.type || "application/octet-stream"}\r
+\r
+`;
+              const fb = new Uint8Array(await v.arrayBuffer());
+              s += new TextDecoder("latin1").decode(fb);
+            } else {
+              s += `\r
+\r
+${v}`;
+            }
+            s += `\r
+`;
+          }
+          s += `--${boundary}--\r
+`;
+          bytes = new TextEncoder().encode(s);
+          headerArr.push([
+            "content-type",
+            `multipart/form-data; boundary=${boundary}`
+          ]);
+        } else {
+          bytes = new TextEncoder().encode(String(body));
+        }
+        bodyB64 = bytesToB64(bytes);
+      }
+      return new Promise((resolve, reject) => {
+        pending.set(id, {
+          resolve: (msg) => {
+            if (msg.error) {
+              reject(new Error(msg.error.message ?? "tunnel error"));
+              return;
+            }
+            resolve({
+              status: msg.status,
+              headers: msg.headers,
+              bytes: msg.bodyB64 ? b64ToBytes(msg.bodyB64) : new Uint8Array(0)
+            });
+          },
+          reject
+        });
+        p.postMessage({
+          type: "http.req",
+          id,
+          method,
+          path,
+          headers: headerArr,
+          bodyB64
+        });
+      });
+    }
+    async function tunnelFetch(input, init) {
+      let urlStr;
+      let method = init?.method ?? "GET";
+      let headers = init?.headers;
+      let body = init?.body;
+      if (input instanceof Request) {
+        urlStr = input.url;
+        method = init?.method ?? input.method;
+        headers = init?.headers ?? input.headers;
+        if (body == null && input.body) {
+          body = await input.arrayBuffer();
+        }
+      } else {
+        urlStr = String(input);
+      }
+      if (isExternalUrl2(urlStr)) {
+        return originalFetch(input, init);
+      }
+      const relPath = normalizeToRelPath2(urlStr);
+      const r = await httpReq(method, relPath, body ?? null, headers);
+      const respHeaders = new Headers;
+      for (const [k, v] of r.headers ?? [])
+        respHeaders.set(k, v);
+      return new Response(r.bytes, {
+        status: r.status,
+        headers: respHeaders
+      });
+    }
+
+    class TunnelWebSocket extends EventTarget {
+      readyState = 0;
+      static CONNECTING = 0;
+      static OPEN = 1;
+      static CLOSING = 2;
+      static CLOSED = 3;
+      CONNECTING = 0;
+      OPEN = 1;
+      CLOSING = 2;
+      CLOSED = 3;
+      url;
+      binaryType = "blob";
+      bufferedAmount = 0;
+      protocol = "";
+      extensions = "";
+      onopen = null;
+      onmessage = null;
+      onclose = null;
+      onerror = null;
+      _id;
+      constructor(urlIn, _protocols) {
+        super();
+        const urlStr = String(urlIn);
+        this.url = urlStr;
+        this._id = newId();
+        openWs.set(this._id, this);
+        const path = normalizeToRelPath2(urlStr);
+        (async () => {
+          const p = port ?? await portReady;
+          p.postMessage({ type: "ws.open", id: this._id, path });
+        })();
+      }
+      _handle(msg) {
+        if (msg.type === "ws.opened") {
+          this.readyState = 1;
+          const ev = new Event("open");
+          this.onopen?.(ev);
+          this.dispatchEvent(ev);
+        } else if (msg.type === "ws.message") {
+          const bytes = msg.dataB64 ? b64ToBytes(msg.dataB64) : new Uint8Array(0);
+          let data;
+          if (msg.binary) {
+            data = this.binaryType === "arraybuffer" ? bytes.buffer : new Blob([bytes]);
+          } else {
+            data = new TextDecoder().decode(bytes);
+          }
+          const ev = new MessageEvent("message", { data });
+          this.onmessage?.(ev);
+          this.dispatchEvent(ev);
+        } else if (msg.type === "ws.closed") {
+          this.readyState = 3;
+          const ev = new CloseEvent("close", {
+            code: msg.code ?? 1000,
+            reason: msg.reason ?? ""
+          });
+          this.onclose?.(ev);
+          this.dispatchEvent(ev);
+          openWs.delete(this._id);
+        } else if (msg.type === "ws.error") {
+          const ev = new Event("error");
+          this.onerror?.(ev);
+          this.dispatchEvent(ev);
+        }
+      }
+      send(data) {
+        (async () => {
+          const p = port ?? await portReady;
+          let bytes;
+          let binary = false;
+          if (typeof data === "string") {
+            bytes = new TextEncoder().encode(data);
+          } else if (data instanceof Blob) {
+            bytes = new Uint8Array(await data.arrayBuffer());
+            binary = true;
+          } else if (data instanceof ArrayBuffer) {
+            bytes = new Uint8Array(data);
+            binary = true;
+          } else if (ArrayBuffer.isView(data)) {
+            bytes = new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+            binary = true;
+          } else {
+            bytes = new TextEncoder().encode(String(data));
+          }
+          p.postMessage({
+            type: "ws.send",
+            id: this._id,
+            dataB64: bytesToB64(bytes),
+            binary
+          });
+        })();
+      }
+      close(code, reason) {
+        (async () => {
+          const p = port ?? await portReady;
+          p.postMessage({ type: "ws.close", id: this._id, code, reason });
+        })();
+      }
+      addEventListener(type, listener, options) {
+        super.addEventListener(type, listener, options);
+      }
+    }
+
+    class TunnelXHR extends EventTarget {
+      static UNSENT = 0;
+      static OPENED = 1;
+      static HEADERS_RECEIVED = 2;
+      static LOADING = 3;
+      static DONE = 4;
+      UNSENT = 0;
+      OPENED = 1;
+      HEADERS_RECEIVED = 2;
+      LOADING = 3;
+      DONE = 4;
+      readyState = 0;
+      status = 0;
+      statusText = "";
+      responseText = "";
+      response = null;
+      responseType = "";
+      responseURL = "";
+      withCredentials = false;
+      timeout = 0;
+      upload = new EventTarget;
+      onreadystatechange = null;
+      onload = null;
+      onerror = null;
+      onloadend = null;
+      onabort = null;
+      onprogress = null;
+      ontimeout = null;
+      _method = "GET";
+      _url = "";
+      _reqHeaders = [];
+      _respHeaders = [];
+      _aborted = false;
+      open(method, url) {
+        this._method = method;
+        this._url = url;
+        this.readyState = 1;
+        this.onreadystatechange?.();
+      }
+      setRequestHeader(name, value) {
+        this._reqHeaders.push([name, value]);
+      }
+      getAllResponseHeaders() {
+        return this._respHeaders.map(([k, v]) => `${k}: ${v}`).join(`\r
+`);
+      }
+      getResponseHeader(name) {
+        const lc = name.toLowerCase();
+        const hit = this._respHeaders.find(([k]) => k.toLowerCase() === lc);
+        return hit ? hit[1] : null;
+      }
+      abort() {
+        this._aborted = true;
+        this.readyState = 0;
+      }
+      send(body) {
+        if (isExternalUrl2(this._url)) {
+          const real = new originalXHR;
+          real.open(this._method, this._url);
+          for (const [k, v] of this._reqHeaders)
+            real.setRequestHeader(k, v);
+          real.onload = () => {
+            this.status = real.status;
+            this.responseText = real.responseText;
+            this.response = real.response;
+            this.readyState = 4;
+            this.onreadystatechange?.();
+            this.onload?.();
+            this.onloadend?.();
+            this.dispatchEvent(new Event("load"));
+          };
+          real.onerror = () => {
+            this.onerror?.();
+            this.dispatchEvent(new Event("error"));
+          };
+          real.send(body);
+          return;
+        }
+        const relPath = normalizeToRelPath2(this._url);
+        httpReq(this._method, relPath, body ?? null, this._reqHeaders).then((r) => {
+          if (this._aborted)
+            return;
+          this.status = r.status;
+          this._respHeaders = r.headers ?? [];
+          this.responseText = new TextDecoder().decode(r.bytes);
+          if (this.responseType === "arraybuffer") {
+            this.response = r.bytes.buffer;
+          } else if (this.responseType === "blob") {
+            this.response = new Blob([r.bytes]);
+          } else if (this.responseType === "json") {
+            try {
+              this.response = JSON.parse(this.responseText);
+            } catch {
+              this.response = null;
+            }
+          } else {
+            this.response = this.responseText;
+          }
+          this.readyState = 4;
+          this.onreadystatechange?.();
+          this.onload?.();
+          this.onloadend?.();
+          this.dispatchEvent(new Event("load"));
+        }, () => {
+          if (this._aborted)
+            return;
+          this.onerror?.();
+          this.dispatchEvent(new Event("error"));
+        });
+      }
+    }
+
+    class TunnelEventSource extends EventTarget {
+      static CONNECTING = 0;
+      static OPEN = 1;
+      static CLOSED = 2;
+      readyState = 0;
+      url;
+      withCredentials = false;
+      onopen = null;
+      onmessage = null;
+      onerror = null;
+      constructor(url) {
+        super();
+        this.url = String(url);
+        (async () => {
+          try {
+            const relPath = normalizeToRelPath2(this.url);
+            const r = await httpReq("GET", relPath, null, [
+              ["accept", "text/event-stream"]
+            ]);
+            this.readyState = 1;
+            this.onopen?.(new Event("open"));
+            const text = new TextDecoder().decode(r.bytes);
+            for (const block of text.split(/\n\n/)) {
+              const data = block.split(`
+`).filter((l) => l.startsWith("data:")).map((l) => l.slice(5).trim()).join(`
+`);
+              if (data) {
+                const ev = new MessageEvent("message", { data });
+                this.onmessage?.(ev);
+                this.dispatchEvent(ev);
+              }
+            }
+            this.readyState = 2;
+          } catch {
+            this.onerror?.(new Event("error"));
+          }
+        })();
+      }
+      close() {
+        this.readyState = 2;
+      }
+    }
+    const SELF_HREF = (() => {
+      try {
+        return globalThis.location?.href ?? "";
+      } catch {
+        return "";
+      }
+    })();
+    const SELF_BASE_DIR = computeSelfBaseDir(SELF_HREF);
+    const objectUrls = new Set;
+    const objectUrlScripts = new Map;
+    function isSelfOriginUrl2(u) {
+      return isSelfOriginUrl(u, SELF_BASE_DIR, SELF_HREF, objectUrls);
+    }
+    function isExternalUrl2(u) {
+      return isExternalUrl(u, SELF_BASE_DIR, SELF_HREF, objectUrls);
+    }
+    function normalizeToRelPath2(u) {
+      return normalizeToRelPath(u, SELF_BASE_DIR);
+    }
+    const URL_ATTRS = new Set([
+      "src",
+      "srcset",
+      "href",
+      "poster",
+      "action",
+      "formaction",
+      "data",
+      "background",
+      "cite",
+      "longdesc",
+      "usemap",
+      "manifest"
+    ]);
+    const URL_STYLE_PROPS = new Set([
+      "background",
+      "backgroundImage",
+      "background-image",
+      "borderImage",
+      "border-image",
+      "borderImageSource",
+      "border-image-source",
+      "listStyle",
+      "list-style",
+      "listStyleImage",
+      "list-style-image",
+      "cursor",
+      "mask",
+      "maskImage",
+      "mask-image",
+      "webkitMask",
+      "-webkit-mask",
+      "webkitMaskImage",
+      "-webkit-mask-image",
+      "content",
+      "src"
+    ]);
+    const __BLOB_CACHE_MAX = 256;
+    const __BLOB_REVOKE_DELAY_MS = 30000;
+    const blobCache = new Map;
+    const blobStats = {
+      created: 0,
+      revoked: 0,
+      hits: 0,
+      misses: 0,
+      inFlightRevokes: 0
+    };
+    function __evictIfOverCap() {
+      while (blobCache.size > __BLOB_CACHE_MAX) {
+        const oldestKey = blobCache.keys().next().value;
+        if (oldestKey === undefined)
+          break;
+        const ent = blobCache.get(oldestKey);
+        blobCache.delete(oldestKey);
+        blobStats.inFlightRevokes++;
+        const t = setTimeout(() => {
+          ent.url.then((u) => {
+            if (typeof u === "string" && u.startsWith("blob:")) {
+              try {
+                URL.revokeObjectURL(u);
+                blobStats.revoked++;
+              } catch {}
+            }
+          }).finally(() => {
+            blobStats.inFlightRevokes--;
+          });
+        }, __BLOB_REVOKE_DELAY_MS);
+        ent.pendingRevoke = t;
+      }
+    }
+    function resolveToBlobUrl(rel) {
+      if (isExternalUrl2(rel))
+        return Promise.resolve(rel);
+      const hashIdx = rel.indexOf("#");
+      const pathPart = hashIdx >= 0 ? rel.slice(0, hashIdx) : rel;
+      const frag = hashIdx >= 0 ? rel.slice(hashIdx) : "";
+      const key = normalizeToRelPath2(pathPart);
+      let ent = blobCache.get(key);
+      if (ent) {
+        if (ent.pendingRevoke != null) {
+          clearTimeout(ent.pendingRevoke);
+          ent.pendingRevoke = undefined;
+          blobStats.inFlightRevokes--;
+        }
+        blobCache.delete(key);
+        blobCache.set(key, ent);
+        blobStats.hits++;
+      } else {
+        blobStats.misses++;
+        const url = httpReq("GET", key, null).then((r) => {
+          const ctHeader = r.headers.find(([k]) => k.toLowerCase() === "content-type");
+          const ct = ctHeader?.[1] ?? "application/octet-stream";
+          const blob = new Blob([r.bytes], { type: ct });
+          blobStats.created++;
+          return URL.createObjectURL(blob);
+        });
+        ent = { url };
+        blobCache.set(key, ent);
+        __evictIfOverCap();
+      }
+      return frag ? ent.url.then((b) => b + frag) : ent.url;
+    }
+    const HATCH_PIXEL_PREFIX = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    const HATCH_FRAG = "#hatch=";
+    function isHatchPlaceholder(url) {
+      return url.indexOf(HATCH_PIXEL_PREFIX + HATCH_FRAG) === 0;
+    }
+    function unwrapHatchPlaceholder(url) {
+      if (!isHatchPlaceholder(url))
+        return null;
+      return decodeURIComponent(url.slice((HATCH_PIXEL_PREFIX + HATCH_FRAG).length));
+    }
+    async function rewriteCssTextAsync(text) {
+      const re = /url\(\s*(['"]?)([^'")]+)\1\s*\)/g;
+      const tasks = [];
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        tasks.push({ match: m[0], index: m.index, url: m[2].trim() });
+      }
+      if (tasks.length === 0)
+        return text;
+      const resolved = await Promise.all(tasks.map(async (t) => {
+        if (t.url.startsWith("blob:"))
+          return t.url;
+        const unwrapped = unwrapHatchPlaceholder(t.url);
+        if (unwrapped != null) {
+          try {
+            return await resolveToBlobUrl(unwrapped);
+          } catch {
+            return t.url;
+          }
+        }
+        if (isExternalUrl2(t.url))
+          return t.url;
+        try {
+          return await resolveToBlobUrl(t.url);
+        } catch {
+          return t.url;
+        }
+      }));
+      let out = "";
+      let last = 0;
+      tasks.forEach((t, i) => {
+        out += text.slice(last, t.index);
+        out += `url("${resolved[i]}")`;
+        last = t.index + t.match.length;
+      });
+      out += text.slice(last);
+      return out;
+    }
+    function rewriteCssText(text) {
+      return rewriteCssTextAsync(text);
+    }
+    const mediaSourceLoads = new WeakMap;
+    window.addEventListener("error", (event) => {
+      const source = event.target;
+      if (!event.isTrusted || !(source instanceof HTMLSourceElement) || !(source.parentElement instanceof HTMLMediaElement) || source.hasAttribute("src"))
+        return;
+      const state = mediaSourceLoads.get(source);
+      if (state === "pending" || state === undefined && source.hasAttribute("data-hatch-src")) {
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    function isElement(el) {
+      if (el instanceof Element)
+        return true;
+      const ownerWindow = el?.ownerDocument?.defaultView;
+      return ownerWindow != null && el instanceof ownerWindow.Element;
+    }
+    function setAttr(el, name, value, ...rest) {
+      if (!isElement(el)) {
+        return el.setAttribute(name, value, ...rest);
+      }
+      name = String(name);
+      if (value == null) {
+        if (name.toLowerCase() === "src" && el instanceof HTMLSourceElement) {
+          mediaSourceLoads.set(el, "settled");
+        }
+        try {
+          el.removeAttribute(name);
+        } catch {}
+        return;
+      }
+      const v = String(value);
+      const lcName = name.toLowerCase();
+      const tag = el.tagName?.toUpperCase();
+      if ((tag === "A" || tag === "BASE" || tag === "AREA") && lcName === "href") {
+        el.setAttribute(name, v);
+        return;
+      }
+      if (!URL_ATTRS.has(lcName) && lcName !== "style" && lcName !== "srcset") {
+        el.setAttribute(name, v);
+        return;
+      }
+      if (lcName === "srcset") {
+        const parts = v.split(",").map((s) => s.trim()).filter(Boolean);
+        Promise.all(parts.map(async (p) => {
+          const segs = p.split(/\s+/);
+          const url = segs[0];
+          const rest = segs.slice(1).join(" ");
+          if (isExternalUrl2(url))
+            return p;
+          const resolved = await resolveToBlobUrl(url);
+          return rest ? `${resolved} ${rest}` : resolved;
+        })).then((rebuilt) => {
+          try {
+            el.setAttribute("srcset", rebuilt.join(", "));
+          } catch {}
+        });
+        return;
+      }
+      if (URL_ATTRS.has(lcName)) {
+        const isMediaSource = tag === "SOURCE" && lcName === "src";
+        if (isExternalUrl2(v)) {
+          if (isMediaSource)
+            mediaSourceLoads.set(el, "settled");
+          el.setAttribute(name, v);
+          return;
+        }
+        if (isMediaSource)
+          mediaSourceLoads.set(el, "pending");
+        if (tag === "IMG" || tag === "VIDEO" && lcName === "poster") {
+          el.setAttribute(name, TRANSPARENT_PIXEL);
+        }
+        resolveToBlobUrl(v).then((blobUrl) => {
+          if (isMediaSource)
+            mediaSourceLoads.set(el, "settled");
+          try {
+            el.setAttribute(name, blobUrl);
+            if (isMediaSource) {
+              const media = el.parentElement;
+              if (media instanceof HTMLMediaElement && media.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+                const nextSibling = el.nextSibling;
+                el.remove();
+                media.insertBefore(el, nextSibling);
+              }
+            }
+          } catch {}
+        }, () => {
+          if (isMediaSource) {
+            mediaSourceLoads.set(el, "settled");
+            el.dispatchEvent(new Event("error"));
+          }
+        });
+        return;
+      }
+      if (lcName === "style") {
+        setStyleAttr(el, v);
+        return;
+      }
+      el.setAttribute(name, v);
+    }
+    function setAttrNS(el, ns, name, value, ...rest) {
+      if (!isElement(el)) {
+        return el.setAttributeNS(ns, name, value, ...rest);
+      }
+      name = String(name);
+      if (value == null) {
+        try {
+          el.removeAttributeNS(ns ?? null, name);
+        } catch {}
+        return;
+      }
+      const v = String(value);
+      const lcName = name.split(":").pop().toLowerCase();
+      if (lcName === "href" && URL_ATTRS.has("href")) {
+        if (isExternalUrl2(v)) {
+          el.setAttributeNS(ns ?? null, name, v);
+          return;
+        }
+        resolveToBlobUrl(v).then((blobUrl) => {
+          try {
+            el.setAttributeNS(ns ?? null, name, blobUrl);
+          } catch {}
+        }, () => {});
+        return;
+      }
+      try {
+        el.setAttributeNS(ns ?? null, name, v);
+      } catch {}
+    }
+    function setUrlProp(el, name, value) {
+      if (isElement(el)) {
+        setAttr(el, name.toLowerCase(), value);
+      } else {
+        el[name] = value;
+      }
+      return value;
+    }
+    const TRANSPARENT_PIXEL = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+    const HTML_TAG_ATTRS = {
+      img: ["src", "srcset", "poster"],
+      image: ["href"],
+      video: ["src", "poster"],
+      audio: ["src"],
+      source: ["src", "srcset"],
+      script: ["src"],
+      link: ["href"],
+      iframe: ["src"],
+      embed: ["src"],
+      object: ["data"],
+      track: ["src"],
+      input: ["src"],
+      form: ["action"],
+      button: ["formaction"],
+      use: ["href"]
+    };
+    function rewriteHtmlString(html) {
+      return html.replace(/<([a-zA-Z][a-zA-Z0-9-]*)\b([^>]*)>/g, (m, tag, attrs) => {
+        const lc = String(tag).toLowerCase();
+        const candidates = HTML_TAG_ATTRS[lc];
+        if (!candidates)
+          return m;
+        let out = attrs;
+        for (const a of candidates) {
+          const re = new RegExp(`\\b${a}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, "i");
+          const matched = out.match(re);
+          if (!matched)
+            continue;
+          const value = matched[2] ?? matched[3] ?? matched[4] ?? "";
+          if (isExternalUrl2(value))
+            continue;
+          out = out.replace(re, `data-hatch-${a}="${value.replace(/"/g, "&quot;")}"`);
+        }
+        const styleRe = /\bstyle\s*=\s*("([^"]*)"|'([^']*)')/i;
+        const sm = out.match(styleRe);
+        if (sm) {
+          const value = sm[2] ?? sm[3] ?? "";
+          if (value.includes("url(")) {
+            out = out.replace(styleRe, `data-hatch-style="${value.replace(/"/g, "&quot;")}"`);
+          }
+        }
+        return `<${tag}${out}>`;
+      });
+    }
+    const HTML_URL_ATTRS_BY_TAG = {
+      IMG: ["src", "srcset", "poster"],
+      IMAGE: ["href"],
+      VIDEO: ["src", "poster"],
+      AUDIO: ["src"],
+      SOURCE: ["src", "srcset"],
+      SCRIPT: ["src"],
+      LINK: ["href"],
+      IFRAME: ["src"],
+      EMBED: ["src"],
+      OBJECT: ["data"],
+      TRACK: ["src"],
+      INPUT: ["src"],
+      FORM: ["action"],
+      BUTTON: ["formaction"],
+      USE: ["href", "xlink:href"]
+    };
+    function rewriteSubtreeForTunnel(root) {
+      if (!root)
+        return;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+      let n = walker.currentNode;
+      if (root.nodeType === 1)
+        processOne(root);
+      while (n = walker.nextNode()) {
+        processOne(n);
+      }
+    }
+    function processOne(el) {
+      const tag = (el.tagName ?? "").toUpperCase();
+      const attrs = HTML_URL_ATTRS_BY_TAG[tag];
+      if (attrs) {
+        for (const a of attrs) {
+          const v = el.getAttribute(a);
+          if (v == null)
+            continue;
+          if (isExternalUrl2(v))
+            continue;
+          el.setAttribute("data-hatch-" + a, v);
+          el.removeAttribute(a);
+        }
+      }
+      const style = el.getAttribute("style");
+      if (style && style.includes("url(")) {
+        el.setAttribute("data-hatch-style", style);
+        el.removeAttribute("style");
+      }
+    }
+    function parseAndCleanHtml(html) {
+      const tpl = document.createElement("template");
+      tpl.innerHTML = html;
+      rewriteSubtreeForTunnel(tpl.content);
+      return tpl.content;
+    }
+    function setInnerHTML(el, html, which = "innerHTML") {
+      const s = html == null ? "" : String(html);
+      if (which === "innerHTML" && typeof el.tagName === "string" && el.tagName.toUpperCase() === "TEMPLATE") {
+        try {
+          el.innerHTML = s;
+        } catch {}
+        return;
+      }
+      if (which === "outerHTML") {
+        const frag = parseAndCleanHtml(s);
+        const wrap = document.createElement("div");
+        wrap.appendChild(frag);
+        try {
+          el.outerHTML = wrap.innerHTML;
+        } catch {}
+        queueMicrotask(() => processDataHatchAttrs(document.body));
+        return;
+      }
+      const frag = parseAndCleanHtml(s);
+      try {
+        while (el.firstChild)
+          el.removeChild(el.firstChild);
+        el.appendChild(frag);
+      } catch {}
+      queueMicrotask(() => processDataHatchAttrs(el));
+    }
+    function insertAdjacentHTMLT(el, position, html) {
+      const s = html == null ? "" : String(html);
+      const frag = parseAndCleanHtml(s);
+      const wrap = document.createElement("template");
+      wrap.content.appendChild(frag);
+      try {
+        el.insertAdjacentHTML(position, wrap.innerHTML);
+      } catch {}
+      queueMicrotask(() => processDataHatchAttrs(document.body));
+    }
+    function processDataHatchAttrs(root) {
+      const SELECTORS = "[data-hatch-src], [data-hatch-href], [data-hatch-srcset], [data-hatch-poster], [data-hatch-action], [data-hatch-data], [data-hatch-style]";
+      root.querySelectorAll(SELECTORS).forEach((el) => {
+        const attrs = el.getAttributeNames();
+        for (const a of attrs) {
+          if (!a.startsWith("data-hatch-"))
+            continue;
+          const real = a.slice("data-hatch-".length);
+          const value = el.getAttribute(a) ?? "";
+          el.removeAttribute(a);
+          if (real === "style")
+            setStyleAttr(el, value);
+          else
+            setAttr(el, real, value);
+        }
+      });
+    }
+    const styleProxyCache = new WeakMap;
+    function getStyle(el) {
+      if (el == null)
+        return el;
+      let real;
+      try {
+        real = el.style;
+      } catch {
+        return;
+      }
+      if (real == null || typeof real !== "object" && typeof real !== "function") {
+        return real;
+      }
+      let proxy = styleProxyCache.get(real);
+      if (proxy)
+        return proxy;
+      proxy = new Proxy(real, {
+        get(target, prop, _receiver) {
+          const v = Reflect.get(target, prop, target);
+          if (typeof v === "function")
+            return v.bind(target);
+          return v;
+        },
+        set(target, prop, value) {
+          if (typeof prop === "string") {
+            setStyle(el, prop, value);
+            return true;
+          }
+          return Reflect.set(target, prop, value, target);
+        }
+      });
+      styleProxyCache.set(real, proxy);
+      return proxy;
+    }
+    function setStyle(el, propName, value) {
+      const v = value == null ? "" : String(value);
+      if (propName.startsWith("--")) {
+        rewriteCssText(v).then((rewritten) => {
+          try {
+            el.style.setProperty(propName, rewritten);
+          } catch {}
+        });
+        return;
+      }
+      if (URL_STYLE_PROPS.has(propName) && v.includes("url(")) {
+        rewriteCssText(v).then((rewritten) => {
+          try {
+            el.style[propName] = rewritten;
+          } catch {}
+        });
+        return;
+      }
+      try {
+        el.style[propName] = v;
+      } catch {}
+    }
+    function setStyleAttr(el, attrValue) {
+      if (!attrValue.includes("url(")) {
+        el.setAttribute("style", attrValue);
+        return;
+      }
+      rewriteCssText(attrValue).then((rewritten) => {
+        try {
+          el.setAttribute("style", rewritten);
+        } catch {}
+      });
+    }
+    function setStyleText(styleEl, text) {
+      if (!(styleEl instanceof HTMLStyleElement)) {
+        try {
+          styleEl.textContent = text;
+        } catch {}
+        return;
+      }
+      if (!text.includes("url(")) {
+        styleEl.textContent = text;
+        return;
+      }
+      rewriteCssText(text).then((rewritten) => {
+        try {
+          styleEl.textContent = rewritten;
+        } catch {}
+      });
+    }
+    function tunnelImage(_w, _h) {
+      const img = new originalImage;
+      const desc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+      if (desc?.set) {
+        const origSet = desc.set;
+        const origGet = desc.get;
+        Object.defineProperty(img, "src", {
+          configurable: true,
+          get() {
+            return origGet.call(img);
+          },
+          set(v) {
+            if (v == null)
+              return origSet.call(img, "");
+            const s = String(v);
+            if (isExternalUrl2(s))
+              return origSet.call(img, s);
+            resolveToBlobUrl(s).then((b) => origSet.call(img, b), () => origSet.call(img, s));
+          }
+        });
+      }
+      return img;
+    }
+    function tunnelSendBeacon(url, data) {
+      tunnelFetch(url, { method: "POST", body: data, keepalive: true }).catch(() => {});
+      return true;
+    }
+    function tunnelWorker(url, options) {
+      const own = ownObjectUrl(url, objectUrls);
+      if (own === null || typeof originalWorker !== "function") {
+        throw new Error("[__tunnel] new Worker() is not supported in Muse Spaces.");
+      }
+      const script = objectUrlScripts.get(own);
+      return new originalWorker(script === undefined ? own : originalCreateObjectURL(workerScriptBlob(script)), options);
+    }
+    function tunnelImport(spec) {
+      throw new Error("[__tunnel] dynamic import() of '" + String(spec) + "' is not supported in Muse Spaces.");
+    }
+    function installCssObserver() {
+      try {
+        const proto = window.CSSStyleSheet?.prototype;
+        if (proto) {
+          const origInsertRule = proto.insertRule;
+          proto.insertRule = function(rule, index) {
+            if (typeof rule === "string" && rule.includes("url(")) {
+              const idx = origInsertRule.call(this, rule, index);
+              rewriteCssText(rule).then((rewritten) => {
+                if (rewritten !== rule) {
+                  try {
+                    this.deleteRule(idx);
+                    origInsertRule.call(this, rewritten, idx);
+                  } catch {}
+                }
+              });
+              return idx;
+            }
+            return origInsertRule.call(this, rule, index);
+          };
+          const origReplace = proto.replace;
+          if (origReplace) {
+            proto.replace = function(text) {
+              if (typeof text === "string" && text.includes("url(")) {
+                return rewriteCssText(text).then((rewritten) => origReplace.call(this, rewritten));
+              }
+              return origReplace.call(this, text);
+            };
+          }
+          const origReplaceSync = proto.replaceSync;
+          if (origReplaceSync) {
+            proto.replaceSync = function(text) {
+              if (typeof text === "string" && text.includes("url(")) {
+                const ret = origReplaceSync.call(this, text);
+                rewriteCssText(text).then((rewritten) => {
+                  try {
+                    origReplaceSync.call(this, rewritten);
+                  } catch {}
+                });
+                return ret;
+              }
+              return origReplaceSync.call(this, text);
+            };
+          }
+        }
+      } catch (e) {}
+      function sweepSheet(sheet) {
+        try {
+          const rules = sheet.cssRules;
+          for (let i = 0;i < rules.length; i++) {
+            const rule = rules[i];
+            const txt = rule.cssText;
+            if (txt && (txt.includes(HATCH_FRAG) || txt.includes("url(") && !/url\(\s*["']?(blob:|https?:|data:image\/gif;base64,R0)/.test(txt))) {
+              rewriteCssText(txt).then((rewritten) => {
+                if (rewritten !== txt) {
+                  try {
+                    sheet.deleteRule(i);
+                    sheet.insertRule(rewritten, i);
+                  } catch {}
+                }
+              });
+            }
+          }
+        } catch {}
+      }
+      function sweepAll() {
+        for (const sheet of Array.from(document.styleSheets)) {
+          sweepSheet(sheet);
+        }
+      }
+      const mo = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          for (const node of Array.from(m.addedNodes)) {
+            if (node instanceof HTMLStyleElement) {
+              const txt = node.textContent ?? "";
+              if (txt.includes("url(")) {
+                rewriteCssText(txt).then((rewritten) => {
+                  if (rewritten !== txt) {
+                    try {
+                      node.textContent = rewritten;
+                    } catch {}
+                  }
+                });
+              }
+            } else if (node instanceof HTMLLinkElement && node.rel === "stylesheet") {
+              node.addEventListener("load", () => sweepSheet(node.sheet), { once: true });
+            }
+          }
+        }
+      });
+      mo.observe(document, { subtree: true, childList: true });
+      Promise.resolve().then(sweepAll);
+      setTimeout(sweepAll, 0);
+      setTimeout(sweepAll, 50);
+      setTimeout(sweepAll, 250);
+    }
+    function rewriteAuthoredHtml() {
+      const SELECTORS = "[data-hatch-src], [data-hatch-href], [data-hatch-srcset]";
+      document.querySelectorAll(SELECTORS).forEach((el) => {
+        const src = el.getAttribute("data-hatch-src");
+        const href = el.getAttribute("data-hatch-href");
+        const srcset = el.getAttribute("data-hatch-srcset");
+        if (src)
+          setAttr(el, "src", src);
+        if (href)
+          setAttr(el, "href", href);
+        if (srcset)
+          setAttr(el, "srcset", srcset);
+      });
+    }
+    let historyUrlWarned = false;
+    function warnHistoryUrlDropped(method, url) {
+      if (url === undefined || url === null)
+        return;
+      if (historyUrlWarned)
+        return;
+      historyUrlWarned = true;
+      try {
+        console.warn("[__tunnel] history." + method + "() was called with a URL; the URL was ignored. A Muse web artifact " + "renders in an opaque origin with no navigable URL of its own, so " + "the browser rejects any URL change. State kept in the URL will not " + "persist or survive a reload — keep it in component state, or in " + "the artifact's database through a server action.");
+      } catch {}
+    }
+    const originalFetch = globalThis.fetch?.bind(globalThis) ?? (() => {
+      throw new Error("no native fetch");
+    });
+    const originalXHR = globalThis.XMLHttpRequest;
+    const originalWorker = globalThis.Worker;
+    const originalCreateObjectURL = URL.createObjectURL.bind(URL);
+    const originalImage = globalThis.Image;
+    const tunnel = {
+      fetch: tunnelFetch,
+      XHR: TunnelXHR,
+      WebSocket: TunnelWebSocket,
+      EventSource: TunnelEventSource,
+      Image: tunnelImage,
+      Worker: tunnelWorker,
+      import: tunnelImport,
+      sendBeacon: tunnelSendBeacon,
+      setAttr,
+      setAttrNS,
+      setUrlProp,
+      setStyle,
+      getStyle,
+      setStyleAttr,
+      setStyleText,
+      setInnerHTML,
+      insertAdjacentHTML: insertAdjacentHTMLT,
+      rewriteCssText,
+      resolveToBlobUrl,
+      processDataHatchAttrs,
+      rewriteHtmlString,
+      _resolveUrlString: (v) => v,
+      _resolveCssValue: (v) => v,
+      _resolveCssText: (v) => v,
+      _resolveStyleProp: (v) => v,
+      _importMeta: {
+        get url() {
+          return importMetaUrl(SELF_HREF, SELF_BASE_DIR);
+        }
+      },
+      _state: {
+        get port() {
+          return port;
+        },
+        get inFlight() {
+          return pending.size;
+        },
+        get blobCacheSize() {
+          return blobCache.size;
+        },
+        get blobStats() {
+          return { ...blobStats };
+        }
+      }
+    };
+    globalThis.__tunnel = tunnel;
+    window.__tunnel = tunnel;
+    try {
+      globalThis.fetch = tunnelFetch;
+      window.fetch = tunnelFetch;
+      globalThis.XMLHttpRequest = TunnelXHR;
+      window.XMLHttpRequest = TunnelXHR;
+      globalThis.WebSocket = TunnelWebSocket;
+      window.WebSocket = TunnelWebSocket;
+      globalThis.EventSource = TunnelEventSource;
+      window.EventSource = TunnelEventSource;
+      const nav = globalThis.navigator;
+      if (nav && typeof nav.sendBeacon === "function") {
+        nav.sendBeacon = (url, data) => tunnelSendBeacon(url, data);
+      }
+      const NativeURL = globalThis.URL;
+      const TunnelURL = function(url, base) {
+        return resolveTunnelUrl(url, base, SELF_HREF, NativeURL);
+      };
+      TunnelURL.prototype = NativeURL.prototype;
+      for (const k of Object.getOwnPropertyNames(NativeURL)) {
+        if (k === "prototype" || k === "length" || k === "name")
+          continue;
+        try {
+          TunnelURL[k] = NativeURL[k];
+        } catch {}
+      }
+      globalThis.URL = TunnelURL;
+      window.URL = TunnelURL;
+    } catch {}
+    try {
+      const hist = globalThis.history;
+      if (hist && typeof hist.pushState === "function" && typeof hist.replaceState === "function") {
+        const nativePushState = hist.pushState.bind(hist);
+        const nativeReplaceState = hist.replaceState.bind(hist);
+        hist.pushState = function(state, title, url) {
+          warnHistoryUrlDropped("pushState", url);
+          return nativePushState(state, title ?? "");
+        };
+        hist.replaceState = function(state, title, url) {
+          warnHistoryUrlDropped("replaceState", url);
+          return nativeReplaceState(state, title ?? "");
+        };
+      }
+    } catch {}
+    try {
+      const nativeCreateObjectURL = URL.createObjectURL.bind(URL);
+      const nativeRevokeObjectURL = URL.revokeObjectURL.bind(URL);
+      URL.createObjectURL = function(obj) {
+        const created = nativeCreateObjectURL(obj);
+        try {
+          objectUrls.add(created);
+          if (isWorkerScriptBlob(obj))
+            objectUrlScripts.set(created, obj);
+        } catch {}
+        return created;
+      };
+      URL.revokeObjectURL = function(objectUrl) {
+        try {
+          objectUrls.delete(objectUrl);
+          objectUrlScripts.delete(objectUrl);
+        } catch {}
+        nativeRevokeObjectURL(objectUrl);
+      };
+    } catch {}
+    const announceEpoch = Math.random().toString(36).slice(2) + "-" + Date.now().toString(36);
+    let announceTimer = null;
+    function announce() {
+      try {
+        window.parent.postMessage({ type: "bundle:ready", epoch: announceEpoch }, "*");
+      } catch {}
+    }
+    function startAnnouncing() {
+      announce();
+      announceTimer = setInterval(() => {
+        if (port != null) {
+          if (announceTimer != null)
+            clearInterval(announceTimer);
+          announceTimer = null;
+          return;
+        }
+        announce();
+      }, 120);
+    }
+    function onParentMessage(ev) {
+      const data = ev.data;
+      if (!data || typeof data !== "object")
+        return;
+      if (data.type === "bundle:init-port" && ev.ports && ev.ports[0]) {
+        if (port != null)
+          return;
+        if (announceTimer != null) {
+          clearInterval(announceTimer);
+          announceTimer = null;
+        }
+        port = ev.ports[0];
+        port.onmessage = (pe) => {
+          const msg = pe.data;
+          if (!msg || typeof msg !== "object")
+            return;
+          if (msg.type === "http.res") {
+            const ent = pending.get(msg.id);
+            if (ent) {
+              pending.delete(msg.id);
+              ent.resolve(msg);
+            }
+          } else if (msg.type === "ws.opened" || msg.type === "ws.message" || msg.type === "ws.closed" || msg.type === "ws.error") {
+            openWs.get(msg.id)?._handle(msg);
+          }
+        };
+        port.start?.();
+        portReadyResolve?.(port);
+        installCssObserver();
+        rewriteAuthoredHtml();
+        try {
+          window.parent.postMessage({ type: "bundle:port-attached" }, "*");
+        } catch {}
+      }
+    }
+    window.addEventListener("message", onParentMessage);
+    installDownloadLinks(tunnelFetch, isExternalUrl2, __BLOB_REVOKE_DELAY_MS);
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      startAnnouncing();
+    } else {
+      document.addEventListener("DOMContentLoaded", startAnnouncing);
+    }
+  })();
+})();
+
+;
+"use strict";
+var CARD_COLORS = [{
+  key: "red",
+  label: "赤",
+  swatch: "#d23b3b"
+}, {
+  key: "blue",
+  label: "青",
+  swatch: "#2e6ad6"
+}, {
+  key: "green",
+  label: "緑",
+  swatch: "#2ea35e"
+}, {
+  key: "white",
+  label: "白",
+  swatch: "#f2f0e9"
+}, {
+  key: "purple",
+  label: "紫",
+  swatch: "#7b4bc4"
+}, {
+  key: "yellow",
+  label: "黄",
+  swatch: "#e3b81e"
+}];
+function colorLabel(key) {
+  for (var i = 0; i < CARD_COLORS.length; i++) if (CARD_COLORS[i].key === key) return CARD_COLORS[i].label;
+  return "紫";
+}
+var CARD_TYPES = [{
+  key: "spirit",
+  label: "スピリット"
+}, {
+  key: "brave",
+  label: "ブレイヴ"
+}, {
+  key: "magic",
+  label: "マジック"
+}, {
+  key: "nexus",
+  label: "ネクサス"
+}];
+function typeLabel(key) {
+  for (var i = 0; i < CARD_TYPES.length; i++) if (CARD_TYPES[i].key === key) return CARD_TYPES[i].label;
+  return "スピリット";
+}
+function blankSpec() {
+  return {
+    name: "",
+    family: "",
+    cost: 5,
+    reduction: 3,
+    reductionColor: null,
+    showBp: true,
+    color: "purple",
+    cardType: "spirit",
+    levels: 3,
+    symbols: 1,
+    cores: [1, 3, 5],
+    bp: ["3000", "5000", "8000"],
+    effects: [["Lv1・Lv2・Lv3『このスピリットの召喚時』", ""]],
+    flavor: "",
+    code: "",
+    artKind: "none",
+    artKey: "",
+    artCrop: null
+  };
+}
+var SOUL_CORE_TOKEN = "【ソウルコア】";
+;
+"use strict";
+var CARD_W = 1406;
+var CARD_H = 2048;
+var SS = 2;
+var SERIF = '"Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", "Noto Serif CJK JP", "Noto Serif JP", serif';
+var SANS = '"Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans CJK JP", "Noto Sans JP", sans-serif';
+var GOLD = "rgb(216,178,106)";
+var GOLD_L = "rgb(246,224,164)";
+var THEMES = {
+  red: {
+    frameTop: "rgb(146,32,40)",
+    frameBottom: "rgb(62,14,22)",
+    vineStroke: "rgba(255,150,140,0.82)",
+    vineLeaf: "rgba(230,90,80,0.75)",
+    vineDot: "rgba(255,230,220,0.86)",
+    damask: "rgba(255,180,160,0.24)",
+    cornerFill: "rgb(225,60,60)",
+    cornerHi: "rgb(250,165,155)",
+    spiritGem: "rgb(150,30,35)",
+    costShadow: "rgb(96,30,26)",
+    hue: 355
+  },
+  blue: {
+    frameTop: "rgb(32,74,150)",
+    frameBottom: "rgb(14,30,70)",
+    vineStroke: "rgba(140,190,255,0.82)",
+    vineLeaf: "rgba(80,140,235,0.75)",
+    vineDot: "rgba(220,240,255,0.86)",
+    damask: "rgba(160,200,255,0.24)",
+    cornerFill: "rgb(50,110,230)",
+    cornerHi: "rgb(150,195,250)",
+    spiritGem: "rgb(25,60,130)",
+    costShadow: "rgb(26,44,96)",
+    hue: 220
+  },
+  green: {
+    frameTop: "rgb(28,112,62)",
+    frameBottom: "rgb(12,50,28)",
+    vineStroke: "rgba(140,235,170,0.82)",
+    vineLeaf: "rgba(70,190,110,0.75)",
+    vineDot: "rgba(225,255,235,0.86)",
+    damask: "rgba(160,255,190,0.24)",
+    cornerFill: "rgb(40,180,95)",
+    cornerHi: "rgb(150,240,180)",
+    spiritGem: "rgb(20,95,50)",
+    costShadow: "rgb(26,80,40)",
+    hue: 135
+  },
+  white: {
+    frameTop: "rgb(216,214,206)",
+    frameBottom: "rgb(126,124,116)",
+    vineStroke: "rgba(110,108,100,0.85)",
+    vineLeaf: "rgba(165,163,153,0.8)",
+    vineDot: "rgba(255,255,255,0.9)",
+    damask: "rgba(90,88,80,0.16)",
+    cornerFill: "rgb(232,230,222)",
+    cornerHi: "rgb(255,255,255)",
+    spiritGem: "rgb(120,118,110)",
+    costShadow: "rgb(96,94,88)",
+    hue: null
+  },
+  purple: {
+    frameTop: "rgb(74,44,128)",
+    frameBottom: "rgb(30,16,58)",
+    vineStroke: "rgba(188,152,240,0.82)",
+    vineLeaf: "rgba(168,132,226,0.75)",
+    vineDot: "rgba(240,226,255,0.86)",
+    damask: "rgba(200,170,255,0.24)",
+    cornerFill: "rgb(150,100,225)",
+    cornerHi: "rgb(200,165,250)",
+    spiritGem: "rgb(70,60,120)",
+    costShadow: "rgb(56,30,96)",
+    hue: 270
+  },
+  yellow: {
+    frameTop: "rgb(172,132,22)",
+    frameBottom: "rgb(84,62,10)",
+    vineStroke: "rgba(255,225,130,0.82)",
+    vineLeaf: "rgba(235,185,60,0.75)",
+    vineDot: "rgba(255,250,220,0.86)",
+    damask: "rgba(255,230,150,0.26)",
+    cornerFill: "rgb(240,190,40)",
+    cornerHi: "rgb(255,230,140)",
+    spiritGem: "rgb(140,105,15)",
+    costShadow: "rgb(96,74,20)",
+    hue: 48
+  }
+};
+var SOURCE_GEM_HUE = 270;
+function rgbToHsl(r, g, b) {
+  var max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+  var l = (max + min) / 2;
+  if (max === min) return [0, 0, l];
+  var d = max - min;
+  var s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  var h;
+  if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;else if (max === g) h = ((b - r) / d + 2) * 60;else h = ((r - g) / d + 4) * 60;
+  return [h, s, l];
+}
+function hslToRgb(h, s, l) {
+  var hn = (h % 360 + 360) % 360 / 360;
+  if (s === 0) return [l, l, l];
+  var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  var p = 2 * l - q;
+  var conv = function (t) {
+    var tt = t;
+    if (tt < 0) tt += 1;
+    if (tt > 1) tt -= 1;
+    if (tt < 1 / 6) return p + (q - p) * 6 * tt;
+    if (tt < 1 / 2) return q;
+    if (tt < 2 / 3) return p + (q - p) * (2 / 3 - tt) * 6;
+    return p;
+  };
+  return [conv(hn + 1 / 3), conv(hn), conv(hn - 1 / 3)];
+}
+var tintCache = new Map();
+function tinted(src, color, mode) {
+  if (color === "purple") return src;
+  var key = mode + ":" + color + ":" + src.width + "x" + src.height;
+  var hit = tintCache.get(key);
+  if (hit) return hit;
+  var theme = THEMES[color];
+  var scale = Math.min(1, 800 / src.width);
+  var w = Math.max(1, Math.round(src.width * scale));
+  var h = Math.max(1, Math.round(src.height * scale));
+  var out = document.createElement("canvas");
+  out.width = w;
+  out.height = h;
+  var g = out.getContext("2d");
+  if (!g) return src;
+  g.drawImage(src.canvas, 0, 0, w, h);
+  var img = g.getImageData(0, 0, w, h);
+  var data = img.data;
+  for (var i = 0; i < data.length; i += 4) {
+    var a = data[i + 3] || 0;
+    if (a === 0) continue;
+    var r = (data[i] || 0) / 255;
+    var gg = (data[i + 1] || 0) / 255;
+    var b = (data[i + 2] || 0) / 255;
+    var hsl = rgbToHsl(r, gg, b);
+    var hue = hsl[0],
+      sat = hsl[1],
+      lig = hsl[2];
+    if (mode === "emblem") {
+      var isPurpleGem = hue >= 225 && hue <= 315 && sat > 0.22 && lig > 0.06 && lig < 0.92;
+      if (!isPurpleGem) continue;
+    }
+    var nh, ns, nl;
+    if (theme.hue === null) {
+      nh = hue;
+      ns = sat * 0.1;
+      nl = 0.62 + (lig - 0.5) * 0.55;
+    } else {
+      nh = theme.hue + (hue - SOURCE_GEM_HUE) * 0.15;
+      ns = sat;
+      nl = lig;
+    }
+    var rgb = hslToRgb(nh, ns, nl);
+    data[i] = Math.round(rgb[0] * 255);
+    data[i + 1] = Math.round(rgb[1] * 255);
+    data[i + 2] = Math.round(rgb[2] * 255);
+  }
+  g.putImageData(img, 0, 0);
+  var result = {
+    canvas: out,
+    width: w,
+    height: h
+  };
+  tintCache.set(key, result);
+  return result;
+}
+var EMBLEM_SPLIT = 0.5;
+var EMBLEM_BLACK_SCALE = 1.3;
+var EMBLEM_GOLD_SCALE = 0.7;
+var emblemWarpCache = new WeakMap();
+function warpCostEmblem(src) {
+  var hit = emblemWarpCache.get(src.canvas);
+  if (hit) return hit;
+  var scale = Math.min(1, 800 / Math.max(src.width, src.height));
+  var w = Math.max(1, Math.round(src.width * scale));
+  var h = Math.max(1, Math.round(src.height * scale));
+  var inC = document.createElement("canvas");
+  inC.width = w;
+  inC.height = h;
+  var ig = inC.getContext("2d");
+  if (!ig) return src;
+  ig.drawImage(src.canvas, 0, 0, w, h);
+  var srcData;
+  try {
+    srcData = ig.getImageData(0, 0, w, h);
+  } catch (e) {
+    return src;
+  }
+  var out = document.createElement("canvas");
+  out.width = w;
+  out.height = h;
+  var og = out.getContext("2d");
+  if (!og) return src;
+  var outData = og.createImageData(w, h);
+  var sd = srcData.data,
+    od = outData.data;
+  var cx = (w - 1) / 2,
+    cy = (h - 1) / 2;
+  var radius = Math.min(w, h) / 2;
+  var splitOut = EMBLEM_SPLIT * EMBLEM_BLACK_SCALE;
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      var dx = x - cx,
+        dy = y - cy;
+      var r = Math.sqrt(dx * dx + dy * dy) / radius;
+      var o = (y * w + x) * 4;
+      if (r > 1) continue;
+      var rs = r <= splitOut ? r / EMBLEM_BLACK_SCALE : EMBLEM_SPLIT + (r - splitOut) / EMBLEM_GOLD_SCALE;
+      var k = r === 0 ? 0 : rs / r;
+      var sx = cx + dx * k,
+        sy = cy + dy * k;
+      var x0 = Math.min(w - 1, Math.max(0, Math.floor(sx)));
+      var y0 = Math.min(h - 1, Math.max(0, Math.floor(sy)));
+      var x1 = Math.min(w - 1, x0 + 1);
+      var y1 = Math.min(h - 1, y0 + 1);
+      var fx = Math.min(1, Math.max(0, sx - Math.floor(sx)));
+      var fy = Math.min(1, Math.max(0, sy - Math.floor(sy)));
+      var i00 = (y0 * w + x0) * 4,
+        i10 = (y0 * w + x1) * 4,
+        i01 = (y1 * w + x0) * 4,
+        i11 = (y1 * w + x1) * 4;
+      for (var ch = 0; ch < 4; ch++) {
+        var top = (sd[i00 + ch] || 0) * (1 - fx) + (sd[i10 + ch] || 0) * fx;
+        var bot = (sd[i01 + ch] || 0) * (1 - fx) + (sd[i11 + ch] || 0) * fx;
+        od[o + ch] = Math.round(top * (1 - fy) + bot * fy);
+      }
+    }
+  }
+  og.putImageData(outData, 0, 0);
+  var result = {
+    canvas: out,
+    width: w,
+    height: h
+  };
+  emblemWarpCache.set(src.canvas, result);
+  return result;
+}
+function loadImage(src) {
+  return new Promise(function (resolve, reject) {
+    var img = __tunnel.Image();
+    img.onload = function () {
+      resolve(img);
+    };
+    img.onerror = function () {
+      reject(new Error("image failed to load: " + src));
+    };
+    __tunnel.setUrlProp(img, "src", src);
+  });
+}
+function loadTrimmed(src) {
+  return loadImage(src).then(function (img) {
+    var c = document.createElement("canvas");
+    c.width = img.naturalWidth;
+    c.height = img.naturalHeight;
+    var g = c.getContext("2d");
+    if (!g) throw new Error("no 2d context");
+    g.drawImage(img, 0, 0);
+    var data = g.getImageData(0, 0, c.width, c.height).data;
+    var minX = c.width,
+      minY = c.height,
+      maxX = -1,
+      maxY = -1;
+    for (var y = 0; y < c.height; y++) {
+      for (var x = 0; x < c.width; x++) {
+        var i = (y * c.width + x) * 4;
+        var lum = 0.2126 * (data[i] || 0) + 0.7152 * (data[i + 1] || 0) + 0.0722 * (data[i + 2] || 0);
+        if (lum > 16) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+    if (maxX < 0) return {
+      canvas: c,
+      width: c.width,
+      height: c.height
+    };
+    var w = maxX - minX + 1,
+      h = maxY - minY + 1;
+    var out = document.createElement("canvas");
+    out.width = w;
+    out.height = h;
+    var og = out.getContext("2d");
+    if (!og) throw new Error("no 2d context");
+    og.drawImage(c, minX, minY, w, h, 0, 0, w, h);
+    return {
+      canvas: out,
+      width: w,
+      height: h
+    };
+  });
+}
+function loadArtImage(src) {
+  return loadImage(src).catch(function () {
+    return null;
+  });
+}
+function font(kind, size) {
+  return "700 " + size * SS + "px " + (kind === "serif" ? SERIF : SANS);
+}
+function vgrad(g, y, h, top, bottom) {
+  var gr = g.createLinearGradient(0, y * SS, 0, (y + h) * SS);
+  gr.addColorStop(0, top);
+  gr.addColorStop(1, bottom);
+  return gr;
+}
+function poly(g, pts) {
+  g.beginPath();
+  pts.forEach(function (pt, i) {
+    if (i === 0) g.moveTo(pt[0] * SS, pt[1] * SS);else g.lineTo(pt[0] * SS, pt[1] * SS);
+  });
+  g.closePath();
+}
+function roundRectPath(g, x, y, w, h, r) {
+  g.beginPath();
+  g.roundRect(x * SS, y * SS, w * SS, h * SS, r * SS);
+}
+function drawText(g, str, x, y, f, fill, opts) {
+  opts = opts || {};
+  g.font = f;
+  g.textAlign = opts.align || "left";
+  g.textBaseline = "top";
+  if (opts.stroke) {
+    g.lineJoin = "round";
+    g.strokeStyle = opts.stroke;
+    g.lineWidth = (opts.strokeWidth || 0) * SS;
+    g.strokeText(str, x * SS, y * SS);
+  }
+  g.fillStyle = fill;
+  g.fillText(str, x * SS, y * SS);
+  return g.measureText(str).width / SS;
+}
+function measure(g, str, f) {
+  g.font = f;
+  return g.measureText(str).width / SS;
+}
+function wrapText(g, str, f, maxw) {
+  var lines = [],
+    cur = "";
+  for (var ci = 0; ci < str.length; ci++) {
+    var ch = str[ci];
+    if (cur && measure(g, cur + ch, f) > maxw) {
+      lines.push(cur);
+      cur = ch;
+    } else cur += ch;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+var SOUL_ADV = 1.3;
+function toUnits(str) {
+  var units = [];
+  String(str).split(SOUL_CORE_TOKEN).forEach(function (part, pi) {
+    if (pi > 0) units.push({
+      soul: true
+    });
+    Array.from(part).forEach(function (ch) {
+      units.push({
+        ch: ch
+      });
+    });
+  });
+  return units;
+}
+function unitWidth(g, u, f, size) {
+  return u.soul ? size * SOUL_ADV : measure(g, u.ch, f);
+}
+function unitsWidth(g, units, f, size) {
+  var w = 0,
+    run = "";
+  var flush = function () {
+    if (run) {
+      w += measure(g, run, f);
+      run = "";
+    }
+  };
+  units.forEach(function (u) {
+    if (u.soul) {
+      flush();
+      w += size * SOUL_ADV;
+    } else run += u.ch;
+  });
+  flush();
+  return w;
+}
+var LINE_START_FORBIDDEN = "、。，．・：；？！ー～…‥っゃゅょぁぃぅぇぉゎッャュョァィゥェォヮゝゞ々）］｝】』」〉》”’";
+var LINE_END_FORBIDDEN = "（［｛【『「〈《“‘";
+function isLineStartForbidden(u) {
+  return !!u.ch && LINE_START_FORBIDDEN.indexOf(u.ch) >= 0;
+}
+function isLineEndForbidden(u) {
+  return !!u.ch && LINE_END_FORBIDDEN.indexOf(u.ch) >= 0;
+}
+function wrapUnits(g, str, f, size, maxwAt) {
+  var text = String(str == null ? "" : str);
+  if (text === "") return [];
+  var lines = [];
+  text.split(/\r\n|\r|\n/).forEach(function (seg) {
+    var segStart = lines.length;
+    var cur = [],
+      curW = 0;
+    toUnits(seg).forEach(function (u) {
+      var w = unitWidth(g, u, f, size);
+      if (cur.length > 0 && curW + w > maxwAt(lines.length)) {
+        if (isLineStartForbidden(u)) {
+          cur.push(u);
+          curW += w;
+        } else if (isLineEndForbidden(cur[cur.length - 1]) && cur.length > 1) {
+          var tail = cur.pop();
+          lines.push(cur);
+          cur = [tail, u];
+          curW = unitWidth(g, tail, f, size) + w;
+        } else {
+          lines.push(cur);
+          cur = [u];
+          curW = w;
+        }
+      } else {
+        cur.push(u);
+        curW += w;
+      }
+    });
+    if (cur.length > 0) lines.push(cur);else if (lines.length === segStart) lines.push([]);
+  });
+  return lines;
+}
+function drawSoulCore(g, soul, cx, cy, size) {
+  if (soul && soul.naturalWidth > 0) {
+    var iw = size * 1.12;
+    var ih = iw * soul.naturalHeight / soul.naturalWidth;
+    g.drawImage(soul, (cx - iw / 2) * SS, (cy - ih / 2) * SS, iw * SS, ih * SS);
+    return;
+  }
+  var w = size * 1.08,
+    h = size * 0.98;
+  var x0 = cx - w / 2,
+    y0 = cy - h / 2;
+  var hex = [[x0 + w * 0.27, y0 + h * 0.03], [x0 + w * 0.73, y0 + h * 0.03], [x0 + w * 0.98, y0 + h * 0.5], [x0 + w * 0.73, y0 + h * 0.97], [x0 + w * 0.27, y0 + h * 0.97], [x0 + w * 0.02, y0 + h * 0.5]];
+  g.save();
+  poly(g, hex);
+  g.clip();
+  var grad = g.createLinearGradient(x0 * SS, y0 * SS, (x0 + w) * SS, (y0 + h) * SS);
+  grad.addColorStop(0, "rgb(255,96,96)");
+  grad.addColorStop(0.22, "rgb(255,176,66)");
+  grad.addColorStop(0.42, "rgb(250,230,90)");
+  grad.addColorStop(0.6, "rgb(110,220,120)");
+  grad.addColorStop(0.78, "rgb(90,160,255)");
+  grad.addColorStop(1, "rgb(190,110,255)");
+  g.fillStyle = grad;
+  g.fillRect(x0 * SS, y0 * SS, w * SS, h * SS);
+  g.strokeStyle = "rgba(255,255,255,0.55)";
+  g.lineWidth = 1.5 * SS;
+  hex.forEach(function (pt) {
+    g.beginPath();
+    g.moveTo(cx * SS, cy * SS);
+    g.lineTo(pt[0] * SS, pt[1] * SS);
+    g.stroke();
+  });
+  g.beginPath();
+  g.ellipse((cx - w * 0.14) * SS, (cy - h * 0.16) * SS, w * 0.16 * SS, h * 0.13 * SS, -0.5, 0, Math.PI * 2);
+  g.fillStyle = "rgba(255,255,255,0.75)";
+  g.fill();
+  g.restore();
+  poly(g, hex);
+  g.strokeStyle = "rgba(255,255,255,0.95)";
+  g.lineWidth = Math.max(2, size * 0.07) * SS;
+  g.lineJoin = "round";
+  g.stroke();
+}
+function drawRichLine(g, units, x, y, f, size, fill, opts, soul) {
+  var pen = x,
+    run = "";
+  var flush = function () {
+    if (!run) return;
+    pen += drawText(g, run, pen, y, f, fill, opts);
+    run = "";
+  };
+  units.forEach(function (u) {
+    if (u.soul) {
+      flush();
+      drawSoulCore(g, soul || null, pen + size * SOUL_ADV / 2, y + size * 0.52, size);
+      pen += size * SOUL_ADV;
+    } else {
+      run += u.ch;
+    }
+  });
+  flush();
+  return pen - x;
+}
+function gemPaste(g, gem, cx, cy, w, outline) {
+  var h = w * gem.height / gem.width;
+  var x0 = cx - w / 2,
+    y0 = cy - h / 2;
+  var hex = [[x0 + w * 0.27, y0 + h * 0.03], [x0 + w * 0.73, y0 + h * 0.03], [x0 + w * 0.98, y0 + h * 0.5], [x0 + w * 0.73, y0 + h * 0.97], [x0 + w * 0.27, y0 + h * 0.97], [x0 + w * 0.02, y0 + h * 0.5]];
+  g.save();
+  poly(g, hex);
+  g.clip();
+  g.drawImage(gem.canvas, x0 * SS, y0 * SS, w * SS, h * SS);
+  g.restore();
+  if (outline) {
+    poly(g, hex);
+    g.strokeStyle = "rgb(255,255,255)";
+    g.lineWidth = Math.max(3, w * 0.055) * 0.7 * SS;
+    g.lineJoin = "round";
+    g.stroke();
+  }
+}
+function vine(g, cx, y0, y1, phase, theme) {
+  g.beginPath();
+  var steps = 130,
+    i,
+    t,
+    y,
+    x;
+  for (i = 0; i <= steps; i++) {
+    t = i / steps;
+    y = y0 + (y1 - y0) * t;
+    x = cx + 13 * Math.sin(t * 22 + phase);
+    if (i === 0) g.moveTo(x * SS, y * SS);else g.lineTo(x * SS, y * SS);
+  }
+  g.strokeStyle = theme.vineStroke;
+  g.lineWidth = 4 * SS;
+  g.stroke();
+  for (var k = 0; k < 9; k++) {
+    t = (k + 0.5) / 9;
+    y = y0 + (y1 - y0) * t;
+    x = cx + 13 * Math.sin(t * 22 + phase);
+    var side = Math.cos(t * 22 + phase) > 0 ? 1 : -1;
+    poly(g, [[x, y], [x + side * 15, y - 7], [x + side * 6, y + 8]]);
+    g.fillStyle = theme.vineLeaf;
+    g.fill();
+    g.beginPath();
+    g.ellipse(x * SS, y * SS, 3 * SS, 3 * SS, 0, 0, Math.PI * 2);
+    g.fillStyle = theme.vineDot;
+    g.fill();
+  }
+}
+function cornerGem(g, cx, cy, r, theme) {
+  poly(g, [[cx, cy - r], [cx + r * 0.72, cy], [cx, cy + r], [cx - r * 0.72, cy]]);
+  g.fillStyle = theme.cornerFill;
+  g.fill();
+  g.strokeStyle = GOLD_L;
+  g.lineWidth = 2 * SS;
+  g.stroke();
+  poly(g, [[cx, cy - r], [cx + r * 0.72, cy], [cx, cy]]);
+  g.fillStyle = theme.cornerHi;
+  g.fill();
+}
+var REDUCTION_POSITIONS = {
+  1: [[373, 152]],
+  2: [[350, 122], [396, 182]],
+  3: [[350, 92], [396, 152], [350, 212]],
+  4: [[344, 107], [410, 107], [344, 197], [410, 197]],
+  5: [[344, 92], [410, 92], [344, 152], [410, 152], [377, 212]],
+  6: [[344, 92], [410, 92], [344, 152], [410, 152], [344, 212], [410, 212]]
+};
+var LV_ROWS = [{
+  top: "rgb(46,104,186)",
+  bot: "rgb(26,62,120)"
+}, {
+  top: "rgb(226,128,36)",
+  bot: "rgb(150,76,16)"
+}, {
+  top: "rgb(204,52,72)",
+  bot: "rgb(128,26,44)"
+}];
+function renderCard(canvas, spec, assets) {
+  canvas.width = CARD_W * SS;
+  canvas.height = CARD_H * SS;
+  var g = canvas.getContext("2d");
+  if (!g) return;
+  var W = CARD_W,
+    H = CARD_H;
+  var win = {
+    x: 58,
+    y: 58,
+    w: 1290,
+    h: 1914
+  };
+  var theme = THEMES[spec.color] || THEMES.purple;
+  var emblem = warpCostEmblem(tinted(assets.emblem, spec.color, "emblem"));
+  var gem = tinted(assets.gem, spec.color, "gem");
+  var reductionGem = tinted(assets.gem, spec.reductionColor || spec.color, "gem");
+  var i, bx, by;
+  g.fillStyle = "rgb(16,10,26)";
+  g.fillRect(0, 0, canvas.width, canvas.height);
+  if (assets.art) {
+    var img = assets.art;
+    var iw = img.naturalWidth,
+      ih = img.naturalHeight;
+    var crop = spec.artCrop || {
+      fx: 0,
+      fy: 0,
+      fw: 1,
+      fh: 1
+    };
+    var sx = crop.fx * iw,
+      sy = crop.fy * ih;
+    var sw = crop.fw * iw,
+      sh = crop.fh * ih;
+    var sc = Math.max(win.w * SS / sw, win.h * SS / sh);
+    var visW = win.w * SS / sc,
+      visH = win.h * SS / sc;
+    sx = sx + (sw - visW) / 2;
+    sw = visW;
+    sh = visH;
+    g.save();
+    roundRectPath(g, win.x, win.y, win.w, win.h, 10);
+    g.clip();
+    g.drawImage(img, sx, sy, sw, sh, win.x * SS, win.y * SS, win.w * SS, win.h * SS);
+    g.restore();
+  } else {
+    g.fillStyle = theme.frameBottom;
+    g.fillRect(win.x * SS, win.y * SS, win.w * SS, win.h * SS);
+  }
+  g.save();
+  g.beginPath();
+  g.rect(0, 0, canvas.width, canvas.height);
+  g.roundRect(win.x * SS, win.y * SS, win.w * SS, win.h * SS, 10 * SS);
+  g.clip("evenodd");
+  g.fillStyle = vgrad(g, 0, H, theme.frameTop, theme.frameBottom);
+  g.fillRect(0, 0, canvas.width, canvas.height);
+  g.restore();
+  g.fillStyle = theme.damask;
+  var dot = function (dx, dy) {
+    poly(g, [[dx, dy - 6], [dx + 4, dy], [dx, dy + 6], [dx - 4, dy]]);
+    g.fill();
+  };
+  for (bx = 18; bx < W; bx += 46) {
+    dot(bx, 29);
+    dot(bx, H - 29);
+  }
+  for (by = 120; by < 1930; by += 46) {
+    dot(29, by);
+    dot(W - 29, by);
+  }
+  vine(g, 29, 400, 1930, 0.0, theme);
+  vine(g, W - 29, 120, 1930, 2.2, theme);
+  g.beginPath();
+  for (i = 0; i <= 100; i++) {
+    var t2 = i / 100;
+    var vx = 400 + (1330 - 400) * t2;
+    var vy = 29 + 11 * Math.sin(t2 * 26);
+    if (i === 0) g.moveTo(vx * SS, vy * SS);else g.lineTo(vx * SS, vy * SS);
+  }
+  g.strokeStyle = theme.vineStroke;
+  g.lineWidth = 4 * SS;
+  g.stroke();
+  roundRectPath(g, 3, 3, W - 6, H - 6, 30);
+  g.strokeStyle = GOLD;
+  g.lineWidth = 3 * SS;
+  g.stroke();
+  roundRectPath(g, 10, 10, W - 20, H - 20, 26);
+  g.strokeStyle = "rgb(24,14,44)";
+  g.lineWidth = 5 * SS;
+  g.stroke();
+  roundRectPath(g, win.x - 4, win.y - 4, win.w + 8, win.h + 8, 12);
+  g.strokeStyle = GOLD;
+  g.lineWidth = 3 * SS;
+  g.stroke();
+  roundRectPath(g, win.x - 9, win.y - 9, win.w + 18, win.h + 18, 14);
+  g.strokeStyle = "rgb(240,226,255)";
+  g.lineWidth = 1 * SS;
+  g.stroke();
+  cornerGem(g, W - 34, 34, 11, theme);
+  cornerGem(g, 34, H - 38, 9, theme);
+  cornerGem(g, W - 34, H - 38, 9, theme);
+  g.beginPath();
+  g.moveTo((win.x - 4) * SS, 1976 * SS);
+  g.lineTo((win.x + win.w + 4) * SS, 1976 * SS);
+  g.strokeStyle = GOLD;
+  g.lineWidth = 2 * SS;
+  g.stroke();
+  drawText(g, "FAN-MADE ORIGINAL", 64, 1996, font("sans", 25), "rgb(196,186,220)");
+  drawText(g, spec.code, 1336, 1992, font("sans", 32), "rgb(238,232,248)", {
+    align: "right"
+  });
+  {
+    var ES = 304 * 0.75,
+      ecx = 168,
+      ecy = 150;
+    g.save();
+    g.beginPath();
+    g.arc(ecx * SS, ecy * SS, ES / 2 * SS, 0, Math.PI * 2);
+    g.clip();
+    g.drawImage(emblem.canvas, (ecx - ES / 2) * SS, (ecy - ES / 2) * SS, ES * SS, ES * SS);
+    g.restore();
+    var fCost = font("serif", 148 * 0.75);
+    var label = String(spec.cost);
+    drawText(g, label, ecx, ecy - 74 * 0.75 + 4, fCost, theme.costShadow, {
+      align: "center"
+    });
+    drawText(g, label, ecx, ecy - 74 * 0.75, fCost, "rgb(255,255,255)", {
+      align: "center"
+    });
+  }
+  var positions = REDUCTION_POSITIONS[spec.reduction] || [];
+  var gemW = spec.reduction >= 4 ? 58 : 62;
+  positions.forEach(function (pos) {
+    gemPaste(g, reductionGem, pos[0], pos[1], gemW, true);
+  });
+  {
+    var lab = [[88, 1173], [342, 1173], [372, 1205], [342, 1237], [88, 1237], [104, 1205]];
+    g.save();
+    poly(g, lab);
+    g.clip();
+    g.fillStyle = vgrad(g, 1173, 64, "rgb(206,208,216)", "rgb(128,130,142)");
+    g.fillRect(88 * SS, 1173 * SS, 284 * SS, 64 * SS);
+    g.restore();
+    poly(g, lab);
+    g.strokeStyle = "rgb(52,54,66)";
+    g.lineWidth = 2 * SS;
+    g.stroke();
+    poly(g, [[128, 1192], [141, 1205], [128, 1218], [115, 1205]]);
+    g.fillStyle = theme.spiritGem;
+    g.fill();
+    g.strokeStyle = "rgb(30,28,44)";
+    g.lineWidth = 1 * SS;
+    g.stroke();
+    drawText(g, typeLabel(spec.cardType), 148, 1186, font("sans", 36), "rgb(24,24,38)");
+  }
+  drawText(g, spec.name, 382, 1182, font("serif", 56), "rgb(255,255,255)", {
+    stroke: "rgb(10,8,14)",
+    strokeWidth: 4
+  });
+  {
+    var plate = [[1080, 1158], [1308, 1158], [1332, 1195], [1308, 1232], [1080, 1232], [1056, 1195]];
+    poly(g, plate);
+    g.fillStyle = "rgb(16,14,20)";
+    g.fill();
+    g.strokeStyle = "rgb(205,205,210)";
+    g.lineWidth = 3 * SS;
+    g.stroke();
+    drawText(g, spec.family, 1194, 1176, font("sans", 38), "rgb(255,255,255)", {
+      align: "center"
+    });
+  }
+  LV_ROWS.slice(0, Math.min(3, Math.max(0, spec.levels))).forEach(function (row, idx) {
+    var y = 1290 + idx * 208;
+    var bp = spec.bp[idx] || "";
+    g.save();
+    roundRectPath(g, 90, y, 252, 80, 10);
+    g.clip();
+    g.fillStyle = vgrad(g, y, 80, row.top, row.bot);
+    g.fillRect(90 * SS, y * SS, 252 * SS, 80 * SS);
+    g.restore();
+    roundRectPath(g, 90, y, 252, 80, 10);
+    g.strokeStyle = "rgb(245,245,250)";
+    g.lineWidth = 3 * SS;
+    g.stroke();
+    drawText(g, String(spec.cores[idx] != null ? spec.cores[idx] : 0), 112, y + 12, font("sans", 50), "rgb(255,255,255)", {
+      stroke: "rgb(20,20,30)",
+      strokeWidth: 1
+    });
+    drawText(g, "LV" + (idx + 1), 162, y + 14, font("sans", 46), "rgb(255,255,255)", {
+      stroke: "rgb(20,20,30)",
+      strokeWidth: 2
+    });
+    if (spec.showBp !== false) {
+      drawText(g, bp, 92, y + 88, font("sans", 88), "rgb(255,255,255)", {
+        stroke: "rgb(8,8,12)",
+        strokeWidth: 6
+      });
+    }
+  });
+  var symCount = Math.min(5, Math.max(0, spec.symbols));
+  var symGems = [];
+  if (symCount === 1) {
+    symGems.push({
+      cx: 1225,
+      cy: 1845,
+      size: 175
+    });
+  } else if (symCount >= 2) {
+    var ssize = 118;
+    for (i = 0; i < symCount; i++) symGems.push({
+      cx: 1247 - (symCount - 1 - i) * 106,
+      cy: 1852,
+      size: ssize
+    });
+  }
+  var symLeft = symGems.length > 0 ? Math.min.apply(null, symGems.map(function (s) {
+    return s.cx - s.size / 2;
+  })) : Infinity;
+  var FLAV_BOTTOM = 1908,
+    FLAV_LINE_H = 54;
+  var fFlav = font("serif", 36);
+  var flavLeft = 382;
+  var flavMaxW = symCount >= 2 ? Math.max(240, symLeft - 24 - flavLeft) : 945;
+  var flavLines = [];
+  if (spec.flavor) {
+    flavLines = wrapUnits(g, spec.flavor, fFlav, 36, function () {
+      return flavMaxW;
+    });
+    if (flavLines.length > 3) {
+      var rest3 = flavLines.slice(2).reduce(function (a, b) {
+        return a.concat(b);
+      }, []);
+      while (rest3.length > 0 && unitsWidth(g, rest3.concat([{
+        ch: "…"
+      }]), fFlav, 36) > flavMaxW) rest3.pop();
+      flavLines = [flavLines[0] || [], flavLines[1] || [], rest3.concat([{
+        ch: "…"
+      }])];
+    }
+  }
+  var flavTop = FLAV_BOTTOM - flavLines.length * FLAV_LINE_H;
+  {
+    var startY = 1298;
+    var limitY = flavLines.length > 0 ? flavTop - 16 : 1936;
+    var GEM_BAND_Y = 1745;
+    var bandMaxW = symCount >= 2 ? Math.max(240, symLeft - 24 - 382) : 735;
+    var wrapFrom = function (str, f, size, yStart, lineH) {
+      return wrapUnits(g, str, f, size, function (li) {
+        return yStart + li * lineH >= GEM_BAND_Y ? bandMaxW : 945;
+      });
+    };
+    var layoutFor = function (size) {
+      var f = font("sans", size);
+      var lineH = Math.round(62 * size / 44);
+      var gap = Math.round(26 * size / 44);
+      var yy = startY;
+      var blocks = spec.effects.map(function (ef, idx) {
+        if (idx > 0) yy += gap;
+        var headText = String(ef[0] || "").replace(/[\r\n]+/g, "");
+        var headUnits = headText ? toUnits(headText) : [];
+        var headMaxW = yy >= GEM_BAND_Y ? bandMaxW : 945;
+        var hs = size;
+        while (headUnits.length > 0 && hs > 10 && unitsWidth(g, headUnits, font("sans", hs), hs) > headMaxW) hs -= 2;
+        var headLines = headUnits.length > 0 ? [headUnits] : [];
+        yy += headLines.length * lineH;
+        var bodyLines = wrapFrom(ef[1], f, size, yy, lineH);
+        yy += bodyLines.length * lineH;
+        return {
+          headLines: headLines,
+          bodyLines: bodyLines,
+          headFont: font("sans", hs),
+          headSize: hs
+        };
+      });
+      return {
+        f: f,
+        size: size,
+        lineH: lineH,
+        gap: gap,
+        blocks: blocks,
+        bottom: yy
+      };
+    };
+    var layout = layoutFor(44);
+    var sizes = [40, 36, 32, 28, 24];
+    for (var si = 0; si < sizes.length; si++) {
+      if (layout.bottom <= limitY) break;
+      layout = layoutFor(sizes[si]);
+    }
+    var ey = startY;
+    layout.blocks.forEach(function (blk, idx) {
+      if (idx > 0) ey += layout.gap;
+      blk.headLines.forEach(function (ln) {
+        drawRichLine(g, ln, 382, ey, blk.headFont, blk.headSize, "rgb(255,255,255)", {
+          stroke: "rgb(8,8,12)",
+          strokeWidth: 3
+        }, assets.soul);
+        ey += layout.lineH;
+      });
+      blk.bodyLines.forEach(function (ln) {
+        drawRichLine(g, ln, 382, ey, layout.f, layout.size, "rgb(255,255,255)", {
+          stroke: "rgb(8,8,12)",
+          strokeWidth: 3
+        }, assets.soul);
+        ey += layout.lineH;
+      });
+    });
+  }
+  if (flavLines.length > 0) {
+    var fy2 = FLAV_BOTTOM - flavLines.length * FLAV_LINE_H;
+    flavLines.forEach(function (ln) {
+      drawRichLine(g, ln, flavLeft, fy2, fFlav, 36, "rgb(255,255,255)", {
+        stroke: "rgb(8,8,12)",
+        strokeWidth: 3
+      }, assets.soul);
+      fy2 += FLAV_LINE_H;
+    });
+  }
+  symGems.forEach(function (s) {
+    gemPaste(g, gem, s.cx, s.cy, s.size, true);
+  });
+}
+function renderOutputCanvas(spec, assets) {
+  var hi = document.createElement("canvas");
+  renderCard(hi, spec, assets);
+  var out = document.createElement("canvas");
+  out.width = CARD_W;
+  out.height = CARD_H;
+  var g = out.getContext("2d");
+  if (!g) return null;
+  g.drawImage(hi, 0, 0, CARD_W, CARD_H);
+  return out;
+}
+function exportPng(spec, assets) {
+  var out = renderOutputCanvas(spec, assets);
+  if (!out) return Promise.resolve(null);
+  return new Promise(function (resolve) {
+    out.toBlob(resolve, "image/png");
+  });
+}
+function exportPdf(spec, assets) {
+  var out = renderOutputCanvas(spec, assets);
+  if (!out) return Promise.resolve(null);
+  return new Promise(function (resolve) {
+    out.toBlob(resolve, "image/jpeg", 0.92);
+  }).then(function (jpeg) {
+    if (!jpeg) return null;
+    return jpeg.arrayBuffer().then(function (buf) {
+      return buildImagePdf(new Uint8Array(buf), CARD_W, CARD_H);
+    });
+  });
+}
+function buildImagePdf(img, imgW, imgH) {
+  var pageW = 178.58,
+    pageH = 249.45;
+  var enc = new TextEncoder();
+  var chunks = [],
+    offsets = [],
+    size = 0;
+  function push(bytes) {
+    chunks.push(bytes);
+    size += bytes.length;
+  }
+  function pushStr(s) {
+    push(enc.encode(s));
+  }
+  function obj(n, body) {
+    offsets[n] = size;
+    pushStr(n + " 0 obj\n" + body + "\nendobj\n");
+  }
+  pushStr("%PDF-1.4\n");
+  push(new Uint8Array([0x25, 0xe2, 0xe3, 0xcf, 0xd3, 0x0a]));
+  obj(1, "<< /Type /Catalog /Pages 2 0 R >>");
+  obj(2, "<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
+  obj(3, "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 " + pageW + " " + pageH + "] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>");
+  var content = "q\n" + pageW + " 0 0 " + pageH + " 0 0 cm\n/Im0 Do\nQ\n";
+  obj(4, "<< /Length " + content.length + " >>\nstream\n" + content + "endstream");
+  offsets[5] = size;
+  pushStr("5 0 obj\n<< /Type /XObject /Subtype /Image /Width " + imgW + " /Height " + imgH + " /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length " + img.length + " >>\nstream\n");
+  push(img);
+  pushStr("\nendstream\nendobj\n");
+  var xrefPos = size;
+  var xref = "xref\n0 6\n0000000000 65535 f \n";
+  for (var n = 1; n <= 5; n++) xref += String(offsets[n] || 0).padStart(10, "0") + " 00000 n \n";
+  pushStr(xref);
+  pushStr("trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n" + xrefPos + "\n%%EOF");
+  var merged = new Uint8Array(size),
+    at = 0;
+  chunks.forEach(function (chunk) {
+    merged.set(chunk, at);
+    at += chunk.length;
+  });
+  return new Blob([merged], {
+    type: "application/pdf"
+  });
+}
+;
+"use strict";
+var DB_NAME = "orika-standalone";
+var DB_VER = 1;
+var dbPromise = null;
+function openDb() {
+  if (dbPromise) return dbPromise;
+  dbPromise = new Promise(function (resolve, reject) {
+    var req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = function () {
+      var db = req.result;
+      if (!db.objectStoreNames.contains("cards")) db.createObjectStore("cards", {
+        keyPath: "id",
+        autoIncrement: true
+      });
+      if (!db.objectStoreNames.contains("art")) db.createObjectStore("art", {
+        keyPath: "key"
+      });
+      if (!db.objectStoreNames.contains("meta")) db.createObjectStore("meta", {
+        keyPath: "key"
+      });
+    };
+    req.onsuccess = function () {
+      resolve(req.result);
+    };
+    req.onerror = function () {
+      reject(req.error);
+    };
+  });
+  return dbPromise;
+}
+function reqDone(req) {
+  return new Promise(function (resolve, reject) {
+    req.onsuccess = function () {
+      resolve(req.result);
+    };
+    req.onerror = function () {
+      reject(req.error);
+    };
+  });
+}
+function store(name, mode) {
+  return openDb().then(function (db) {
+    return db.transaction(name, mode).objectStore(name);
+  });
+}
+function dbGetAll(name) {
+  return store(name, "readonly").then(function (s) {
+    return reqDone(s.getAll());
+  });
+}
+function dbGet(name, key) {
+  return store(name, "readonly").then(function (s) {
+    return reqDone(s.get(key));
+  });
+}
+function dbPut(name, value) {
+  return store(name, "readwrite").then(function (s) {
+    return reqDone(s.put(value));
+  });
+}
+function dbAdd(name, value) {
+  return store(name, "readwrite").then(function (s) {
+    return reqDone(s.add(value));
+  });
+}
+function dbDel(name, key) {
+  return store(name, "readwrite").then(function (s) {
+    return reqDone(s.delete(key));
+  });
+}
+function getMeta(key, fallback) {
+  return dbGet("meta", key).then(function (row) {
+    return row ? row.value : fallback;
+  });
+}
+function setMeta(key, value) {
+  return dbPut("meta", {
+    key: key,
+    value: value
+  });
+}
+function listCardsDb() {
+  return dbGetAll("cards").then(function (rows) {
+    rows.sort(function (a, b) {
+      return (b.updatedAt || 0) - (a.updatedAt || 0);
+    });
+    return rows;
+  });
+}
+function purgeStarterData() {
+  return dbGetAll("cards").then(function (rows) {
+    var chain = Promise.resolve();
+    rows.forEach(function (row) {
+      if (row.spec && row.spec.artKind === "bundled") {
+        chain = chain.then(function () {
+          return dbDel("cards", row.id);
+        });
+      }
+    });
+    return chain;
+  }).then(function () {
+    return dbDel("meta", "removed_bundled_art").catch(function () {});
+  }).then(function () {
+    return dbDel("meta", "seeded_v1").catch(function () {});
+  });
+}
+function deliverFile(blob, filename) {
+  var file = new File([blob], filename, {
+    type: blob.type
+  });
+  if (navigator.canShare && navigator.canShare({
+    files: [file]
+  }) && navigator.share) {
+    return navigator.share({
+      files: [file]
+    }).then(function () {
+      return "shared";
+    }, function (e) {
+      if (e && e.name === "AbortError") return "shared";
+      return downloadFallback(blob, filename);
+    });
+  }
+  return Promise.resolve(downloadFallback(blob, filename));
+}
+function downloadFallback(blob, filename) {
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  __tunnel.setUrlProp(a, "href", url);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function () {
+    URL.revokeObjectURL(url);
+  }, 5000);
+  return "downloaded";
+}
+function prepareUpload(file) {
+  var url = URL.createObjectURL(file);
+  return loadArtImage(url).then(function (img) {
+    if (!img) throw new Error("画像を読み込めませんでした");
+    var scale = Math.min(1, 1600 / img.naturalWidth);
+    if (scale >= 1 && file.type === "image/jpeg") return file;
+    var c = document.createElement("canvas");
+    c.width = Math.round(img.naturalWidth * scale);
+    c.height = Math.round(img.naturalHeight * scale);
+    var g = c.getContext("2d");
+    if (!g) throw new Error("画像を処理できませんでした");
+    g.drawImage(img, 0, 0, c.width, c.height);
+    return new Promise(function (resolve, reject) {
+      c.toBlob(function (blob) {
+        if (blob) resolve(blob);else reject(new Error("画像を処理できませんでした"));
+      }, "image/jpeg", 0.9);
+    });
+  }).then(function (blob) {
+    URL.revokeObjectURL(url);
+    return blob;
+  }, function (e) {
+    URL.revokeObjectURL(url);
+    throw e;
+  });
+}
+var CRC_TABLE = null;
+function crc32(data) {
+  if (!CRC_TABLE) {
+    CRC_TABLE = new Int32Array(256);
+    for (var n = 0; n < 256; n++) {
+      var c = n;
+      for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ c >>> 1 : c >>> 1;
+      CRC_TABLE[n] = c;
+    }
+  }
+  var crc = -1;
+  for (var i = 0; i < data.length; i++) crc = crc >>> 8 ^ CRC_TABLE[(crc ^ data[i]) & 0xFF];
+  return (crc ^ -1) >>> 0;
+}
+function makeZip(files) {
+  var enc = new TextEncoder();
+  var chunks = [],
+    centrals = [],
+    offset = 0;
+  function u16(v) {
+    return new Uint8Array([v & 0xFF, v >>> 8 & 0xFF]);
+  }
+  function u32(v) {
+    return new Uint8Array([v & 0xFF, v >>> 8 & 0xFF, v >>> 16 & 0xFF, v >>> 24 & 0xFF]);
+  }
+  function push(b) {
+    chunks.push(b);
+    offset += b.length;
+  }
+  var time = 0;
+  var date = 2024 - 1980 << 9 | 1 << 5 | 1;
+  files.forEach(function (f) {
+    var nameBytes = enc.encode(f.name);
+    var crc = crc32(f.data);
+    var localOffset = offset;
+    push(u32(0x04034b50));
+    push(u16(20));
+    push(u16(0x0800));
+    push(u16(0));
+    push(u16(time));
+    push(u16(date));
+    push(u32(crc));
+    push(u32(f.data.length));
+    push(u32(f.data.length));
+    push(u16(nameBytes.length));
+    push(u16(0));
+    push(nameBytes);
+    push(f.data);
+    var cen = [];
+    cen.push(u32(0x02014b50));
+    cen.push(u16(20));
+    cen.push(u16(20));
+    cen.push(u16(0x0800));
+    cen.push(u16(0));
+    cen.push(u16(time));
+    cen.push(u16(date));
+    cen.push(u32(crc));
+    cen.push(u32(f.data.length));
+    cen.push(u32(f.data.length));
+    cen.push(u16(nameBytes.length));
+    cen.push(u16(0));
+    cen.push(u16(0));
+    cen.push(u16(0));
+    cen.push(u16(0));
+    cen.push(u32(0));
+    cen.push(u32(localOffset));
+    cen.push(nameBytes);
+    centrals.push(cen);
+  });
+  var centralStart = offset;
+  centrals.forEach(function (cen) {
+    cen.forEach(push);
+  });
+  var centralSize = offset - centralStart;
+  push(u32(0x06054b50));
+  push(u16(0));
+  push(u16(0));
+  push(u16(files.length));
+  push(u16(files.length));
+  push(u32(centralSize));
+  push(u32(centralStart));
+  push(u16(0));
+  var total = new Uint8Array(offset),
+    at = 0;
+  chunks.forEach(function (b) {
+    total.set(b, at);
+    at += b.length;
+  });
+  return new Blob([total], {
+    type: "application/zip"
+  });
+}
+;
+"use strict";
+function $(id) {
+  return document.getElementById(id);
+}
+function mk(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+var WIN_ASPECT = 1290 / 1914;
+var spec = blankSpec();
+var editingId = null;
+var dirty = false;
+var savedCards = [];
+var parts = null;
+var artImg = null;
+var artDims = null;
+var artSrc = null;
+var artUrlCache = new Map();
+var confirmDeleteId = null;
+var confirmDeleteArt = false;
+var confirmDelete = false;
+var saving = false;
+var uploading = false;
+var folderSort = "updated-desc";
+var folderThumbCache = new Map();
+var folderRenderSeq = 0;
+function showError(msg) {
+  $("banner-error-text").textContent = msg;
+  $("banner-error").hidden = false;
+}
+function clearError() {
+  $("banner-error").hidden = true;
+}
+function showNotice(msg) {
+  var b = $("banner-notice");
+  if (msg) {
+    b.textContent = msg;
+    b.hidden = false;
+  } else b.hidden = true;
+}
+function cloneSpec(s) {
+  return JSON.parse(JSON.stringify(s));
+}
+function specFromRow(row) {
+  var s = Object.assign(blankSpec(), cloneSpec(row.spec || {}));
+  s.levels = Math.min(3, Math.max(0, s.levels != null ? s.levels : 3));
+  s.reductionColor = CARD_COLORS.some(function (c) {
+    return c.key === s.reductionColor;
+  }) ? s.reductionColor : null;
+  s.showBp = s.showBp !== false;
+  s.symbols = Math.min(5, Math.max(0, s.symbols != null ? s.symbols : 1));
+  s.cores = [0, 1, 2].map(function (i) {
+    return Number(s.cores && s.cores[i]) || 0;
+  });
+  s.bp = [0, 1, 2].map(function (i) {
+    return String((s.bp && s.bp[i]) != null ? s.bp[i] : "");
+  });
+  if (!Array.isArray(s.effects) || s.effects.length === 0) s.effects = [["", ""]];
+  s.effects = s.effects.map(function (e) {
+    return [String(e[0] || ""), String(e[1] || "")];
+  });
+  return s;
+}
+function update(patch) {
+  Object.assign(spec, patch);
+  dirty = true;
+  showNotice(null);
+  confirmDeleteArt = false;
+  renderPreview();
+  syncSaveBtn();
+}
+function currentAssets() {
+  return {
+    emblem: parts.emblem,
+    gem: parts.gem,
+    soul: parts.soul,
+    art: artImg
+  };
+}
+function renderPreview() {
+  var canvas = $("card-canvas");
+  if (!canvas || !parts) return;
+  renderCard(canvas, spec, currentAssets());
+  $("preview-hint").textContent = spec.artKind !== "none" ? "プレビューをドラッグで移動、2本指ピンチで拡大・縮小できます" : "イラストを選ぶとここに表示されます";
+  syncCropPanel();
+}
+function fitCrop(crop) {
+  if (!crop || !artDims) return crop;
+  var imgAspect = artDims.w / artDims.h;
+  var fx = crop.fx,
+    fy = crop.fy,
+    fw = crop.fw;
+  var fh = fw * imgAspect / WIN_ASPECT;
+  if (fh > 1) {
+    fh = 1;
+    fw = fh * WIN_ASPECT / imgAspect;
+  }
+  fx = Math.min(Math.max(fx, 0), 1 - fw);
+  fy = Math.min(Math.max(fy, 0), 1 - fh);
+  return {
+    fx: fx,
+    fy: fy,
+    fw: fw,
+    fh: fh
+  };
+}
+function effectiveCrop() {
+  return fitCrop(spec.artCrop || {
+    fx: 0,
+    fy: 0,
+    fw: 1,
+    fh: 1
+  });
+}
+function syncCropPanel() {
+  var show = spec.artKind !== "none" && !!artDims;
+  $("crop-panel").hidden = !show;
+  if (show) {
+    var crop = effectiveCrop();
+    if (crop) $("crop-zoom").value = String(Math.round(crop.fw * 100));
+  }
+}
+function resolveArtSrc() {
+  if (spec.artKind === "upload") {
+    var key = spec.artKey;
+    if (artUrlCache.has(key)) return Promise.resolve(artUrlCache.get(key));
+    return dbGet("art", key).then(function (row) {
+      if (!row || !row.blob) return null;
+      var url = URL.createObjectURL(row.blob);
+      artUrlCache.set(key, url);
+      return url;
+    }).catch(function () {
+      return null;
+    });
+  }
+  return Promise.resolve(null);
+}
+var artLoadSeq = 0;
+function refreshArt() {
+  var seq = ++artLoadSeq;
+  return resolveArtSrc().then(function (src) {
+    if (seq !== artLoadSeq) return;
+    artSrc = src;
+    if (!src) {
+      artImg = null;
+      artDims = null;
+      renderPreview();
+      renderArtPicker();
+      return;
+    }
+    return loadArtImage(src).then(function (img) {
+      if (seq !== artLoadSeq) return;
+      artImg = img;
+      artDims = img ? {
+        w: img.naturalWidth,
+        h: img.naturalHeight
+      } : null;
+      renderPreview();
+      renderArtPicker();
+    });
+  });
+}
+var dragState = null;
+var pointers = new Map();
+var pinchState = null;
+function cropFhFor(fw) {
+  if (!artDims) return 1;
+  var imgAspect = artDims.w / artDims.h;
+  var fh = fw * imgAspect / WIN_ASPECT;
+  if (fh > 1) fh = 1;
+  return fh;
+}
+function applyCrop(next) {
+  var fitted = fitCrop(next);
+  if (fitted) {
+    spec = Object.assign({}, spec, {
+      artCrop: fitted
+    });
+    dirty = true;
+    renderPreview();
+    syncSaveBtn();
+  }
+}
+function onPreviewPointerDown(e) {
+  if (!artDims || spec.artKind === "none") return;
+  pointers.set(e.pointerId, {
+    x: e.clientX,
+    y: e.clientY
+  });
+  try {
+    e.currentTarget.setPointerCapture(e.pointerId);
+  } catch (err) {}
+  if (pointers.size === 2) {
+    var pts = Array.from(pointers.values());
+    pinchState = {
+      dist: Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)),
+      cx: (pts[0].x + pts[1].x) / 2,
+      cy: (pts[0].y + pts[1].y) / 2,
+      crop: effectiveCrop()
+    };
+    dragState = null;
+  } else if (pointers.size === 1) {
+    dragState = {
+      x: e.clientX,
+      y: e.clientY
+    };
+    pinchState = null;
+  }
+}
+function onPreviewPointerMove(e) {
+  var canvas = $("card-canvas");
+  if (!canvas || !artDims) return;
+  if (!pointers.has(e.pointerId)) return;
+  pointers.set(e.pointerId, {
+    x: e.clientX,
+    y: e.clientY
+  });
+  var rect = canvas.getBoundingClientRect();
+  if (rect.width === 0) return;
+  if (pointers.size === 2 && pinchState) {
+    var pts = Array.from(pointers.values());
+    var dist = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
+    var cx = (pts[0].x + pts[1].x) / 2;
+    var cy = (pts[0].y + pts[1].y) / 2;
+    var c0 = pinchState.crop;
+    if (!c0) return;
+    var fw = Math.min(1, Math.max(0.08, c0.fw * (pinchState.dist / dist)));
+    var fh = cropFhFor(fw);
+    if (fh >= 1) {
+      fh = 1;
+      fw = Math.min(1, fh * WIN_ASPECT / (artDims.w / artDims.h));
+      fh = cropFhFor(fw);
+    }
+    var panLogicalX = (cx - pinchState.cx) / rect.width * 1406;
+    var panLogicalY = (cy - pinchState.cy) / rect.height * 2048;
+    var scaleX = c0.fw * artDims.w / 1290;
+    var scaleY = c0.fh * artDims.h / 1914;
+    applyCrop({
+      fx: c0.fx + (c0.fw - fw) / 2 - panLogicalX * scaleX / artDims.w,
+      fy: c0.fy + (c0.fh - fh) / 2 - panLogicalY * scaleY / artDims.h,
+      fw: fw,
+      fh: fh
+    });
+    return;
+  }
+  if (!dragState) return;
+  var dLogicalX = (e.clientX - dragState.x) / rect.width * 1406;
+  var dLogicalY = (e.clientY - dragState.y) / rect.height * 2048;
+  dragState = {
+    x: e.clientX,
+    y: e.clientY
+  };
+  var base = fitCrop(spec.artCrop || {
+    fx: 0,
+    fy: 0,
+    fw: 1,
+    fh: 1
+  });
+  if (!base) return;
+  var scaleX2 = base.fw * artDims.w / 1290;
+  var scaleY2 = base.fh * artDims.h / 1914;
+  applyCrop({
+    fx: base.fx - dLogicalX * scaleX2 / artDims.w,
+    fy: base.fy - dLogicalY * scaleY2 / artDims.h,
+    fw: base.fw,
+    fh: base.fh
+  });
+}
+function onPreviewPointerUp(e) {
+  pointers.delete(e.pointerId);
+  if (pointers.size === 1) {
+    var p = Array.from(pointers.values())[0];
+    dragState = {
+      x: p.x,
+      y: p.y
+    };
+    pinchState = null;
+  } else if (pointers.size === 0) {
+    dragState = null;
+    pinchState = null;
+  } else if (pointers.size === 2) {
+    var pts = Array.from(pointers.values());
+    pinchState = {
+      dist: Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)),
+      cx: (pts[0].x + pts[1].x) / 2,
+      cy: (pts[0].y + pts[1].y) / 2,
+      crop: effectiveCrop()
+    };
+    dragState = null;
+  }
+}
+function syncStaticInputs() {
+  $("f-name").value = spec.name;
+  $("f-family").value = spec.family;
+  $("f-code").value = spec.code;
+  $("f-flavor").value = spec.flavor;
+  $("f-cost").value = String(spec.cost);
+}
+function syncSaveBtn() {
+  var btn = $("btn-save");
+  btn.disabled = saving || !dirty;
+  btn.textContent = saving ? "保存中…" : editingId !== null ? "上書き保存" : "カードを保存";
+}
+function segSync(groupEl, value) {
+  Array.prototype.forEach.call(groupEl.children, function (btn) {
+    __tunnel.setAttr(btn, "aria-pressed", String(btn.dataset.value === String(value)));
+  });
+}
+function chipSync(groupEl, value) {
+  segSync(groupEl, value);
+}
+function buildSeg(groupEl, values, current, ariaLabelFn, onPick) {
+  __tunnel.setInnerHTML(groupEl, "", "innerHTML");
+  values.forEach(function (v) {
+    var btn = mk("button", null, v.label);
+    btn.type = "button";
+    btn.dataset.value = String(v.value);
+    __tunnel.setAttr(btn, "aria-pressed", String(v.value === current));
+    if (ariaLabelFn) __tunnel.setAttr(btn, "aria-label", ariaLabelFn(v));
+    btn.addEventListener("click", function () {
+      onPick(v.value);
+    });
+    groupEl.appendChild(btn);
+  });
+}
+function buildStaticGroups() {
+  var cg = $("color-group");
+  __tunnel.setInnerHTML(cg, "", "innerHTML");
+  CARD_COLORS.forEach(function (c) {
+    var btn = mk("button", "chip");
+    btn.type = "button";
+    btn.dataset.value = c.key;
+    __tunnel.setAttr(btn, "aria-pressed", String(spec.color === c.key));
+    __tunnel.setAttr(btn, "aria-label", "色を" + c.label + "にする");
+    var sw = mk("span", "swatch");
+    __tunnel.setAttr(sw, "aria-hidden", "true");
+    __tunnel.setStyle(sw, "background", c.swatch);
+    btn.appendChild(sw);
+    btn.appendChild(document.createTextNode(c.label));
+    btn.addEventListener("click", function () {
+      update({
+        color: c.key
+      });
+      chipSync(cg, c.key);
+    });
+    cg.appendChild(btn);
+  });
+  var tg = $("type-group");
+  __tunnel.setInnerHTML(tg, "", "innerHTML");
+  CARD_TYPES.forEach(function (t) {
+    var btn = mk("button", "chip", t.label);
+    btn.type = "button";
+    btn.dataset.value = t.key;
+    __tunnel.setAttr(btn, "aria-pressed", String(spec.cardType === t.key));
+    __tunnel.setAttr(btn, "aria-label", "種類を" + t.label + "にする");
+    btn.addEventListener("click", function () {
+      update({
+        cardType: t.key
+      });
+      chipSync(tg, t.key);
+    });
+    tg.appendChild(btn);
+  });
+  buildSeg($("reduction-group"), [0, 1, 2, 3, 4, 5, 6].map(function (n) {
+    return {
+      value: n,
+      label: String(n)
+    };
+  }), spec.reduction, null, function (n) {
+    update({
+      reduction: n
+    });
+    segSync($("reduction-group"), n);
+  });
+  buildSeg($("symbols-group"), [0, 1, 2, 3, 4, 5].map(function (n) {
+    return {
+      value: n,
+      label: String(n)
+    };
+  }), spec.symbols, function (v) {
+    return "シンボルを" + v.value + "個にする";
+  }, function (n) {
+    update({
+      symbols: n
+    });
+    segSync($("symbols-group"), n);
+  });
+  buildSeg($("levels-group"), [0, 1, 2, 3].map(function (n) {
+    return {
+      value: n,
+      label: n === 0 ? "なし" : "Lv" + n + "まで"
+    };
+  }), spec.levels, function (v) {
+    return v.value === 0 ? "レベルを表示しない" : "レベルを" + v.value + "までにする";
+  }, function (n) {
+    update({
+      levels: n
+    });
+    segSync($("levels-group"), n);
+    buildCoresBp();
+    syncLevelPanels();
+  });
+  var rcg = $("reduction-color-group");
+  __tunnel.setInnerHTML(rcg, "", "innerHTML");
+  var sameBtn = mk("button", "chip", "同じ");
+  sameBtn.type = "button";
+  sameBtn.dataset.value = "";
+  __tunnel.setAttr(sameBtn, "aria-pressed", String(spec.reductionColor == null));
+  __tunnel.setAttr(sameBtn, "aria-label", "軽減の色をカードと同じにする");
+  sameBtn.addEventListener("click", function () {
+    update({
+      reductionColor: null
+    });
+    chipSync(rcg, "");
+  });
+  rcg.appendChild(sameBtn);
+  CARD_COLORS.forEach(function (c) {
+    var btn = mk("button", "chip");
+    btn.type = "button";
+    btn.dataset.value = c.key;
+    __tunnel.setAttr(btn, "aria-pressed", String(spec.reductionColor === c.key));
+    __tunnel.setAttr(btn, "aria-label", "軽減の色を" + c.label + "にする");
+    var sw = mk("span", "swatch");
+    __tunnel.setAttr(sw, "aria-hidden", "true");
+    __tunnel.setStyle(sw, "background", c.swatch);
+    btn.appendChild(sw);
+    btn.appendChild(document.createTextNode(c.label));
+    btn.addEventListener("click", function () {
+      update({
+        reductionColor: c.key
+      });
+      chipSync(rcg, c.key);
+    });
+    rcg.appendChild(btn);
+  });
+  buildSeg($("showbp-group"), [{
+    value: true,
+    label: "表示する"
+  }, {
+    value: false,
+    label: "表示しない"
+  }], spec.showBp, function (v) {
+    return v.value ? "BPを表示する" : "BPを表示しない";
+  }, function (v) {
+    update({
+      showBp: v
+    });
+    segSync($("showbp-group"), v);
+    syncLevelPanels();
+  });
+}
+function syncGroups() {
+  chipSync($("color-group"), spec.color);
+  chipSync($("type-group"), spec.cardType);
+  segSync($("reduction-group"), spec.reduction);
+  segSync($("symbols-group"), spec.symbols);
+  segSync($("levels-group"), spec.levels);
+  chipSync($("reduction-color-group"), spec.reductionColor == null ? "" : spec.reductionColor);
+  segSync($("showbp-group"), spec.showBp);
+}
+function syncLevelPanels() {
+  $("cores-fieldset").hidden = spec.levels === 0;
+  $("showbp-wrap").hidden = spec.levels === 0;
+  $("bp-fieldset").hidden = spec.levels === 0 || !spec.showBp;
+}
+function buildCoresBp() {
+  var cg = $("cores-grid");
+  var bg0 = $("bp-grid");
+  if (spec.levels === 0) {
+    __tunnel.setInnerHTML(cg, "", "innerHTML");
+    __tunnel.setInnerHTML(bg0, "", "innerHTML");
+    return;
+  }
+  __tunnel.setStyle(cg, "gridTemplateColumns", "repeat(" + spec.levels + ", minmax(0, 1fr))");
+  __tunnel.setInnerHTML(cg, "", "innerHTML");
+  [0, 1, 2].slice(0, spec.levels).forEach(function (i) {
+    var cell = mk("div");
+    var lab = mk("label", "label-sm", "LV" + (i + 1));
+    __tunnel.setAttr(lab, "for", "f-core" + i);
+    var input = mk("input", "input");
+    input.id = "f-core" + i;
+    input.type = "number";
+    __tunnel.setAttr(input, "inputmode", "numeric");
+    input.min = "0";
+    input.max = "99";
+    input.value = String(spec.cores[i]);
+    input.addEventListener("input", function () {
+      var cores = spec.cores.slice();
+      cores[i] = Math.min(99, Math.max(0, Math.floor(Number(input.value) || 0)));
+      update({
+        cores: cores
+      });
+    });
+    cell.appendChild(lab);
+    cell.appendChild(input);
+    cg.appendChild(cell);
+  });
+  var bg = $("bp-grid");
+  __tunnel.setStyle(bg, "gridTemplateColumns", "repeat(" + spec.levels + ", minmax(0, 1fr))");
+  __tunnel.setInnerHTML(bg, "", "innerHTML");
+  [0, 1, 2].slice(0, spec.levels).forEach(function (i) {
+    var value = spec.bp[i] || "";
+    var hasPlus = value.indexOf("+") === 0;
+    var cell = mk("div");
+    var lab = mk("label", "label-sm", "LV" + (i + 1));
+    __tunnel.setAttr(lab, "for", "f-bp" + i);
+    var row = mk("div", "bp-row");
+    var plus = mk("button", "bp-plus", "＋");
+    plus.type = "button";
+    __tunnel.setAttr(plus, "aria-pressed", String(hasPlus));
+    __tunnel.setAttr(plus, "aria-label", "LV" + (i + 1) + "のBPの前に＋記号を付ける");
+    plus.title = "数字の前に＋を付ける";
+    var input = mk("input", "input");
+    input.id = "f-bp" + i;
+    __tunnel.setAttr(input, "inputmode", "numeric");
+    input.maxLength = 12;
+    input.placeholder = ["5000", "8000", "11000"][i];
+    input.value = value;
+    plus.addEventListener("click", function () {
+      var bp = spec.bp.slice();
+      var v = bp[i] || "";
+      bp[i] = v.indexOf("+") === 0 ? v.replace(/^\+/, "") : "+" + v;
+      update({
+        bp: bp
+      });
+      buildCoresBp();
+    });
+    input.addEventListener("input", function () {
+      var bp = spec.bp.slice();
+      bp[i] = input.value;
+      update({
+        bp: bp
+      });
+    });
+    row.appendChild(plus);
+    row.appendChild(input);
+    cell.appendChild(lab);
+    cell.appendChild(row);
+    bg.appendChild(cell);
+  });
+}
+function insertSoulToken(fieldId, current, apply) {
+  var el = document.getElementById(fieldId);
+  var start = el && el.selectionStart != null ? el.selectionStart : current.length;
+  var end = el && el.selectionEnd != null ? el.selectionEnd : start;
+  var next = current.slice(0, start) + SOUL_CORE_TOKEN + current.slice(end);
+  apply(next);
+  requestAnimationFrame(function () {
+    var el2 = document.getElementById(fieldId);
+    if (el2) {
+      el2.focus();
+      var pos = start + SOUL_CORE_TOKEN.length;
+      try {
+        el2.setSelectionRange(pos, pos);
+      } catch (e) {}
+    }
+  });
+}
+function makeSoulButton(ariaLabel, onInsert) {
+  var btn = mk("button", "soul-btn");
+  btn.type = "button";
+  __tunnel.setAttr(btn, "aria-label", ariaLabel);
+  var dot = mk("span", "soul-dot");
+  __tunnel.setAttr(dot, "aria-hidden", "true");
+  btn.appendChild(dot);
+  btn.appendChild(document.createTextNode("ソウルコアマークを挿入"));
+  btn.addEventListener("click", onInsert);
+  return btn;
+}
+function buildEffects() {
+  var list = $("effects-list");
+  __tunnel.setInnerHTML(list, "", "innerHTML");
+  spec.effects.forEach(function (ef, i) {
+    var card = mk("div", "effect-card");
+    var head = mk("div", "effect-head");
+    head.appendChild(mk("span", "t", "効果 " + (i + 1)));
+    if (spec.effects.length > 1) {
+      var del = mk("button", "del", "削除");
+      del.type = "button";
+      __tunnel.setAttr(del, "aria-label", "効果" + (i + 1) + "を削除");
+      del.addEventListener("click", function () {
+        update({
+          effects: spec.effects.filter(function (_, j) {
+            return j !== i;
+          })
+        });
+        buildEffects();
+      });
+      head.appendChild(del);
+    }
+    card.appendChild(head);
+    var hLab = mk("label", "sr-only", "効果" + (i + 1) + "の見出し");
+    __tunnel.setAttr(hLab, "for", "f-eh" + i);
+    var hIn = mk("textarea", "input head-input");
+    hIn.id = "f-eh" + i;
+    hIn.rows = 2;
+    hIn.maxLength = 300;
+    hIn.placeholder = "Lv1・Lv2・Lv3『このスピリットの召喚時』";
+    hIn.value = ef[0];
+    __tunnel.setStyle(hIn, "marginBottom", "0.5rem");
+    hIn.addEventListener("input", function () {
+      var effects = spec.effects.map(function (e2, j) {
+        return j === i ? [hIn.value, e2[1]] : e2;
+      });
+      update({
+        effects: effects
+      });
+    });
+    var bLab = mk("label", "sr-only", "効果" + (i + 1) + "の本文");
+    __tunnel.setAttr(bLab, "for", "f-eb" + i);
+    var bIn = mk("textarea", "input");
+    bIn.id = "f-eb" + i;
+    bIn.maxLength = 600;
+    bIn.placeholder = "相手のスピリット1体のコア2個をリザーブに置く。";
+    bIn.value = ef[1];
+    bIn.addEventListener("input", function () {
+      var effects = spec.effects.map(function (e2, j) {
+        return j === i ? [e2[0], bIn.value] : e2;
+      });
+      update({
+        effects: effects
+      });
+    });
+    card.appendChild(hLab);
+    card.appendChild(hIn);
+    card.appendChild(makeSoulButton("効果" + (i + 1) + "の見出しにソウルコアマークを挿入", function () {
+      insertSoulToken("f-eh" + i, spec.effects[i][0], function (next) {
+        var effects = spec.effects.map(function (e2, j) {
+          return j === i ? [next, e2[1]] : e2;
+        });
+        update({
+          effects: effects
+        });
+        hIn.value = next;
+      });
+    }));
+    card.appendChild(bLab);
+    card.appendChild(bIn);
+    card.appendChild(makeSoulButton("効果" + (i + 1) + "の本文にソウルコアマークを挿入", function () {
+      insertSoulToken("f-eb" + i, spec.effects[i][1], function (next) {
+        var effects = spec.effects.map(function (e2, j) {
+          return j === i ? [e2[0], next] : e2;
+        });
+        update({
+          effects: effects
+        });
+        bIn.value = next;
+      });
+    }));
+    list.appendChild(card);
+  });
+  __tunnel.setStyle($("btn-add-effect"), "display", spec.effects.length < 4 ? "" : "none");
+}
+;
+"use strict";
+function colorOrder(key) {
+  for (var i = 0; i < CARD_COLORS.length; i++) if (CARD_COLORS[i].key === key) return i;
+  return CARD_COLORS.length;
+}
+function sortedFolderCards() {
+  var rows = savedCards.slice();
+  var byUpdatedDesc = function (a, b) {
+    return (b.updatedAt || 0) - (a.updatedAt || 0);
+  };
+  if (folderSort === "updated-asc") rows.sort(function (a, b) {
+    return (a.updatedAt || 0) - (b.updatedAt || 0);
+  });else if (folderSort === "color") rows.sort(function (a, b) {
+    var d = colorOrder(a.spec.color) - colorOrder(b.spec.color);
+    if (d !== 0) return d;
+    var n = String(a.spec.name || "").localeCompare(String(b.spec.name || ""), "ja");
+    return n !== 0 ? n : byUpdatedDesc(a, b);
+  });else if (folderSort === "cost-asc") rows.sort(function (a, b) {
+    return a.spec.cost - b.spec.cost || byUpdatedDesc(a, b);
+  });else if (folderSort === "cost-desc") rows.sort(function (a, b) {
+    return b.spec.cost - a.spec.cost || byUpdatedDesc(a, b);
+  });else rows.sort(byUpdatedDesc);
+  return rows;
+}
+function loadArtForSpec(sp) {
+  if (!sp || sp.artKind !== "upload" || !sp.artKey) return Promise.resolve(null);
+  return dbGet("art", sp.artKey).then(function (row) {
+    if (!row || !row.blob) return null;
+    var url = URL.createObjectURL(row.blob);
+    return loadArtImage(url).then(function (img) {
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 2000);
+      return img;
+    });
+  }).catch(function () {
+    return null;
+  });
+}
+function makeFolderThumbnail(row) {
+  var cacheKey = row.id + ":" + (row.updatedAt || 0);
+  if (folderThumbCache.has(cacheKey)) return Promise.resolve(folderThumbCache.get(cacheKey));
+  if (!parts) return Promise.resolve(null);
+  var sp = specFromRow(row);
+  return loadArtForSpec(sp).then(function (img) {
+    var out = renderOutputCanvas(sp, {
+      emblem: parts.emblem,
+      gem: parts.gem,
+      soul: parts.soul,
+      art: img
+    });
+    if (!out) return null;
+    var url = out.toDataURL("image/jpeg", 0.82);
+    folderThumbCache.set(cacheKey, url);
+    return url;
+  }).catch(function () {
+    return null;
+  });
+}
+function renderSavedList() {
+  var loadingEl = $("folder-loading");
+  if (loadingEl) loadingEl.hidden = true;
+  var emptyEl = $("folder-empty");
+  if (emptyEl) emptyEl.hidden = savedCards.length !== 0;
+  var grid = $("folder-grid");
+  if (!grid) return;
+  var seq = ++folderRenderSeq;
+  __tunnel.setInnerHTML(grid, "", "innerHTML");
+  sortedFolderCards().forEach(function (row) {
+    var s = row.spec;
+    var tile = mk("div", "folder-tile" + (row.id === editingId ? " active" : ""));
+    var pick = mk("button", "pick");
+    pick.type = "button";
+    __tunnel.setAttr(pick, "aria-pressed", String(row.id === editingId));
+    __tunnel.setAttr(pick, "aria-label", (s.name || "無題") + "を編集で開く");
+    var ph = mk("span", "thumb-ph", "カード生成中…");
+    pick.appendChild(ph);
+    var info = mk("span", "info");
+    info.appendChild(mk("span", "nm", s.name || "無題"));
+    info.appendChild(mk("span", "meta", (s.code || "コードなし") + " ・ コスト" + s.cost + " ・ " + typeLabel(s.cardType) + " ・ " + colorLabel(s.color)));
+    pick.appendChild(info);
+    pick.addEventListener("click", function () {
+      selectCard(row);
+    });
+    tile.appendChild(pick);
+    var dz = mk("div", "del-zone");
+    if (confirmDeleteId === row.id) {
+      var cr = mk("span", "confirm-row");
+      var yes = mk("button", "confirm-mini danger", "削除する");
+      yes.type = "button";
+      __tunnel.setAttr(yes, "aria-label", s.name + "を削除する");
+      yes.addEventListener("click", function () {
+        deleteCardById(row.id);
+      });
+      var no = mk("button", "confirm-mini cancel", "やめる");
+      no.type = "button";
+      __tunnel.setAttr(no, "aria-label", s.name + "の削除をやめる");
+      no.addEventListener("click", function () {
+        confirmDeleteId = null;
+        renderSavedList();
+      });
+      cr.appendChild(yes);
+      cr.appendChild(no);
+      dz.appendChild(cr);
+    } else {
+      var del = mk("button", "del-link", "削除");
+      del.type = "button";
+      __tunnel.setAttr(del, "aria-label", s.name + "を削除");
+      del.addEventListener("click", function () {
+        confirmDeleteId = row.id;
+        renderSavedList();
+      });
+      dz.appendChild(del);
+    }
+    tile.appendChild(dz);
+    grid.appendChild(tile);
+    makeFolderThumbnail(row).then(function (url) {
+      if (seq !== folderRenderSeq || !url) return;
+      var img = mk("img", "thumb");
+      __tunnel.setUrlProp(img, "src", url);
+      img.alt = (s.name || "無題") + "のカード画像";
+      img.loading = "lazy";
+      pick.replaceChild(img, ph);
+    });
+  });
+  $("delete-zone").hidden = editingId === null;
+  $("delete-confirm").hidden = !confirmDelete;
+  $("btn-delete").hidden = confirmDelete;
+}
+function renderArtPicker() {
+  var row = $("art-row");
+  __tunnel.setInnerHTML(row, "", "innerHTML");
+  var uploadLabel = mk("label", "upload-tile" + (spec.artKind === "upload" ? " selected" : ""));
+  uploadLabel.appendChild(mk("span", "t", uploading ? "送信中…" : "画像を\nアップロード"));
+  var fileInput = mk("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.className = "sr-only";
+  __tunnel.setAttr(fileInput, "aria-label", "イラスト画像をアップロード");
+  fileInput.addEventListener("change", onArtFile);
+  uploadLabel.appendChild(fileInput);
+  row.appendChild(uploadLabel);
+  if (spec.artKind === "upload") {
+    var tile2 = mk("div", "art-tile selected");
+    if (artSrc) {
+      var img2 = mk("img");
+      __tunnel.setUrlProp(img2, "src", artSrc);
+      img2.alt = "アップロードしたイラスト";
+      tile2.appendChild(img2);
+    } else {
+      tile2.appendChild(mk("span", "noimg", "画像なし"));
+    }
+    tile2.appendChild(mk("span", "cap", "アップロード画像"));
+    var dz2 = mk("div", "del-zone");
+    if (confirmDeleteArt) {
+      var ac2 = mk("span", "art-confirm");
+      var yes2 = mk("button", "confirm-mini danger", "削除する");
+      yes2.type = "button";
+      __tunnel.setAttr(yes2, "aria-label", "アップロードしたイラストを削除する");
+      yes2.addEventListener("click", onDeleteArt);
+      var no2 = mk("button", "confirm-mini cancel", "やめる");
+      no2.type = "button";
+      __tunnel.setAttr(no2, "aria-label", "イラストの削除をやめる");
+      no2.addEventListener("click", function () {
+        confirmDeleteArt = false;
+        renderArtPicker();
+      });
+      ac2.appendChild(yes2);
+      ac2.appendChild(no2);
+      dz2.appendChild(ac2);
+    } else {
+      var del2 = mk("button", "del-link", "削除");
+      del2.type = "button";
+      __tunnel.setAttr(del2, "aria-label", "アップロードしたイラストを削除");
+      del2.addEventListener("click", function () {
+        confirmDeleteArt = true;
+        renderArtPicker();
+      });
+      dz2.appendChild(del2);
+    }
+    tile2.appendChild(dz2);
+    row.appendChild(tile2);
+  }
+  var noneBtn = mk("button", "none-tile", "イラストなし");
+  noneBtn.type = "button";
+  __tunnel.setAttr(noneBtn, "aria-pressed", String(spec.artKind === "none"));
+  noneBtn.addEventListener("click", function () {
+    update({
+      artKind: "none",
+      artKey: "",
+      artCrop: null
+    });
+    refreshArt();
+    renderArtPicker();
+  });
+  row.appendChild(noneBtn);
+}
+function renderAll() {
+  syncStaticInputs();
+  buildStaticGroups();
+  buildCoresBp();
+  syncLevelPanels();
+  buildEffects();
+  renderSavedList();
+  renderArtPicker();
+  syncSaveBtn();
+  renderPreview();
+}
+function selectCard(row) {
+  spec = specFromRow(row);
+  editingId = row.id;
+  dirty = false;
+  confirmDeleteId = null;
+  confirmDelete = false;
+  showNotice(null);
+  clearError();
+  renderAll();
+  refreshArt();
+}
+function newCard() {
+  spec = blankSpec();
+  editingId = null;
+  dirty = false;
+  confirmDeleteId = null;
+  confirmDelete = false;
+  showNotice(null);
+  clearError();
+  renderAll();
+  refreshArt();
+}
+function reloadCards(keepNotice) {
+  return listCardsDb().then(function (rows) {
+    savedCards = rows;
+    renderSavedList();
+    if (!keepNotice) return null;
+    return null;
+  });
+}
+function onSave() {
+  if (saving) return;
+  saving = true;
+  syncSaveBtn();
+  clearError();
+  var payload = cloneSpec(spec);
+  payload.name = (payload.name || "").trim() || "無題";
+  var now = Date.now();
+  var op;
+  if (editingId !== null) {
+    var existing = null;
+    savedCards.forEach(function (r) {
+      if (r.id === editingId) existing = r;
+    });
+    op = dbPut("cards", {
+      id: editingId,
+      spec: payload,
+      createdAt: existing ? existing.createdAt : now,
+      updatedAt: now
+    }).then(function () {
+      return editingId;
+    });
+  } else {
+    op = dbAdd("cards", {
+      spec: payload,
+      createdAt: now,
+      updatedAt: now
+    });
+  }
+  op.then(function (id) {
+    return listCardsDb().then(function (rows) {
+      savedCards = rows;
+      var row = null;
+      rows.forEach(function (r) {
+        if (r.id === id) row = r;
+      });
+      if (row) {
+        spec = specFromRow(row);
+        editingId = row.id;
+      }
+      dirty = false;
+      saving = false;
+      showNotice("保存しました");
+      renderAll();
+      refreshArt();
+    });
+  }).catch(function (e) {
+    saving = false;
+    syncSaveBtn();
+    showError("保存に失敗しました: " + String(e));
+  });
+}
+function cleanupArtIfUnused(key, exceptId) {
+  if (!key) return;
+  var used = savedCards.some(function (r) {
+    return r.id !== exceptId && r.spec.artKind === "upload" && r.spec.artKey === key;
+  });
+  if (used) return;
+  if (spec.artKind === "upload" && spec.artKey === key && editingId !== exceptId) return;
+  var url = artUrlCache.get(key);
+  if (url) {
+    URL.revokeObjectURL(url);
+    artUrlCache.delete(key);
+  }
+  dbDel("art", key).catch(function () {});
+}
+function deleteCardById(id) {
+  var row = null;
+  savedCards.forEach(function (r) {
+    if (r.id === id) row = r;
+  });
+  dbDel("cards", id).then(function () {
+    return listCardsDb();
+  }).then(function (rows) {
+    savedCards = rows;
+    if (row && row.spec.artKind === "upload") cleanupArtIfUnused(row.spec.artKey, id);
+    if (id === editingId) {
+      editingId = null;
+      spec = blankSpec();
+      dirty = false;
+      confirmDelete = false;
+      renderAll();
+      refreshArt();
+    }
+    confirmDeleteId = null;
+    showNotice("削除しました");
+    renderSavedList();
+  }).catch(function (e) {
+    showError("削除に失敗しました: " + String(e));
+  });
+}
+function onDeleteCurrent() {
+  if (editingId === null) return;
+  deleteCardById(editingId);
+}
+function onArtFile(e) {
+  var file = e.target.files && e.target.files[0];
+  e.target.value = "";
+  if (!file || uploading) return;
+  uploading = true;
+  renderArtPicker();
+  clearError();
+  prepareUpload(file).then(function (blob) {
+    var key = "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    return dbPut("art", {
+      key: key,
+      blob: blob
+    }).then(function () {
+      artUrlCache.set(key, URL.createObjectURL(blob));
+      uploading = false;
+      update({
+        artKind: "upload",
+        artKey: key,
+        artCrop: null
+      });
+      refreshArt();
+      renderArtPicker();
+    });
+  }).catch(function (err) {
+    uploading = false;
+    renderArtPicker();
+    showError("画像のアップロードに失敗しました: " + String(err && err.message ? err.message : err));
+  });
+}
+function onDeleteArt() {
+  var key = spec.artKey;
+  confirmDeleteArt = false;
+  update({
+    artKind: "none",
+    artKey: "",
+    artCrop: null
+  });
+  if (key) {
+    var url = artUrlCache.get(key);
+    if (url) {
+      URL.revokeObjectURL(url);
+      artUrlCache.delete(key);
+    }
+    dbDel("art", key).catch(function () {});
+  }
+  showNotice("イラストを削除しました");
+  refreshArt();
+  renderArtPicker();
+}
+function fileBase() {
+  return (spec.code || "card") + "-" + (spec.name || "original");
+}
+function onDownloadPng() {
+  if (!parts) return;
+  clearError();
+  exportPng(spec, currentAssets()).then(function (blob) {
+    if (!blob) {
+      showError("PNGの生成に失敗しました");
+      return;
+    }
+    return deliverFile(blob, fileBase() + ".png").then(function (how) {
+      showNotice(how === "shared" ? "共有シートを開きました。保存先を選んでください" : "PNGのダウンロードを開始しました");
+    });
+  });
+}
+function onDownloadPdf() {
+  if (!parts) return;
+  clearError();
+  exportPdf(spec, currentAssets()).then(function (blob) {
+    if (!blob) {
+      showError("PDFの生成に失敗しました");
+      return;
+    }
+    return deliverFile(blob, fileBase() + ".pdf").then(function (how) {
+      showNotice(how === "shared" ? "共有シートを開きました。保存先を選んでください" : "PDFのダウンロードを開始しました");
+    });
+  });
+}
+function buildStandaloneHtml() {
+  var clone = document.documentElement.cloneNode(true);
+  var man = clone.querySelector('link[rel="manifest"]');
+  if (man) __tunnel.setAttr(man, "href", "manifest.webmanifest");
+  ["folder-grid", "art-row", "effects-list", "cores-grid", "bp-grid", "color-group", "type-group", "reduction-group", "symbols-group", "levels-group", "reduction-color-group", "showbp-group"].forEach(function (id) {
+    var e = clone.querySelector("#" + id);
+    if (e) __tunnel.setInnerHTML(e, "", "innerHTML");
+  });
+  var sortClone = clone.querySelector("#folder-sort");
+  if (sortClone) sortClone.value = "updated-desc";
+  var setHidden = function (id, hidden) {
+    var e = clone.querySelector("#" + id);
+    if (e) {
+      if (hidden) __tunnel.setAttr(e, "hidden", "");else e.removeAttribute("hidden");
+    }
+  };
+  setHidden("folder-loading", false);
+  setHidden("folder-empty", true);
+  setHidden("banner-error", true);
+  setHidden("banner-notice", true);
+  setHidden("install-banner", true);
+  setHidden("crop-panel", true);
+  setHidden("delete-zone", true);
+  setHidden("delete-confirm", true);
+  setHidden("btn-delete", false);
+  var note = clone.querySelector("#package-note");
+  if (note) note.textContent = "";
+  var saveBtn = clone.querySelector("#btn-save");
+  if (saveBtn) {
+    saveBtn.textContent = "カードを保存";
+    saveBtn.removeAttribute("disabled");
+  }
+  var hint = clone.querySelector("#preview-hint");
+  if (hint) hint.textContent = "イラストを選ぶとここに表示されます";
+  return "<!doctype html>\n" + clone.outerHTML;
+}
+function fetchBytes(url) {
+  return __tunnel.fetch(url).then(function (r) {
+    if (!r.ok) throw new Error("fetch failed: " + url);
+    return r.arrayBuffer();
+  }).then(function (buf) {
+    return new Uint8Array(buf);
+  });
+}
+function fetchText(url) {
+  return __tunnel.fetch(url).then(function (r) {
+    if (!r.ok) throw new Error("fetch failed: " + url);
+    return r.text();
+  });
+}
+function onDownloadPackage() {
+  var note = $("package-note");
+  note.textContent = "作成中…";
+  clearError();
+  var enc = new TextEncoder();
+  var assetPaths = ["assets/cost-emblem.webp", "assets/symbol-gem.webp", "assets/soul-core.png", "assets/icon-192.png", "assets/icon-512.png"];
+  var jobs = assetPaths.map(function (p) {
+    return fetchBytes(p).then(function (data) {
+      return {
+        name: p,
+        data: data
+      };
+    });
+  });
+  jobs.push(fetchText("assets/manifest.webmanifest").then(function (text) {
+    var fixed = text.split('"icon-192.png"').join('"assets/icon-192.png"').split('"icon-512.png"').join('"assets/icon-512.png"');
+    return {
+      name: "manifest.webmanifest",
+      data: enc.encode(fixed)
+    };
+  }));
+  jobs.push(fetchBytes("assets/sw.js").then(function (data) {
+    return {
+      name: "sw.js",
+      data: data
+    };
+  }));
+  Promise.all(jobs).then(function (files) {
+    files.unshift({
+      name: "index.html",
+      data: enc.encode(buildStandaloneHtml())
+    });
+    var zip = makeZip(files);
+    return deliverFile(zip, "orika-standalone.zip");
+  }).then(function () {
+    note.textContent = "ダウンロードしました。中身は index.html / manifest.webmanifest / sw.js / assets フォルダです。";
+  }).catch(function (e) {
+    note.textContent = "";
+    showError("パッケージの作成に失敗しました: " + String(e));
+  });
+}
+var deferredInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  $("install-banner").hidden = false;
+});
+window.addEventListener("appinstalled", function () {
+  deferredInstallPrompt = null;
+  $("install-banner").hidden = true;
+});
+if ("serviceWorker" in navigator && window.isSecureContext) {
+  try {
+    if (window.top === window.self) {
+      navigator.serviceWorker.register("sw.js").catch(function () {});
+    }
+  } catch (e) {}
+}
+function wireStatic() {
+  $("banner-error-close").addEventListener("click", clearError);
+  $("btn-new").addEventListener("click", newCard);
+  $("btn-save").addEventListener("click", onSave);
+  $("btn-png").addEventListener("click", onDownloadPng);
+  $("btn-pdf").addEventListener("click", onDownloadPdf);
+  $("btn-package").addEventListener("click", onDownloadPackage);
+  $("install-btn").addEventListener("click", function () {
+    if (!deferredInstallPrompt) return;
+    var evt = deferredInstallPrompt;
+    var showInstallUi = evt.prompt;
+    showInstallUi.call(evt);
+    evt.userChoice.then(function () {
+      deferredInstallPrompt = null;
+      $("install-banner").hidden = true;
+    });
+  });
+  $("btn-delete").addEventListener("click", function () {
+    confirmDelete = true;
+    renderSavedList();
+  });
+  $("btn-delete-no").addEventListener("click", function () {
+    confirmDelete = false;
+    renderSavedList();
+  });
+  $("btn-delete-yes").addEventListener("click", onDeleteCurrent);
+  $("btn-add-effect").addEventListener("click", function () {
+    if (spec.effects.length >= 4) return;
+    update({
+      effects: spec.effects.concat([["", ""]])
+    });
+    buildEffects();
+  });
+  $("f-name").addEventListener("input", function () {
+    update({
+      name: $("f-name").value
+    });
+  });
+  $("f-family").addEventListener("input", function () {
+    update({
+      family: $("f-family").value
+    });
+  });
+  $("f-code").addEventListener("input", function () {
+    update({
+      code: $("f-code").value
+    });
+  });
+  $("f-flavor").addEventListener("input", function () {
+    update({
+      flavor: $("f-flavor").value
+    });
+  });
+  $("btn-soul-flavor").addEventListener("click", function () {
+    insertSoulToken("f-flavor", spec.flavor, function (next) {
+      update({
+        flavor: next
+      });
+      $("f-flavor").value = next;
+    });
+  });
+  $("f-cost").addEventListener("input", function () {
+    update({
+      cost: Math.min(99, Math.max(0, Math.floor(Number($("f-cost").value) || 0)))
+    });
+  });
+  $("crop-zoom").addEventListener("input", function () {
+    var crop = effectiveCrop();
+    if (!crop) return;
+    var fw = Number($("crop-zoom").value) / 100;
+    var next = fitCrop({
+      fx: crop.fx + (crop.fw - fw) / 2,
+      fy: crop.fy,
+      fw: fw,
+      fh: crop.fh
+    });
+    if (next) update({
+      artCrop: next
+    });
+  });
+  $("crop-reset").addEventListener("click", function () {
+    update({
+      artCrop: null
+    });
+  });
+  var canvas = $("card-canvas");
+  canvas.addEventListener("pointerdown", onPreviewPointerDown);
+  canvas.addEventListener("pointermove", onPreviewPointerMove);
+  canvas.addEventListener("pointerup", onPreviewPointerUp);
+  canvas.addEventListener("pointercancel", onPreviewPointerUp);
+  var sortSel = $("folder-sort");
+  if (sortSel) sortSel.addEventListener("change", function () {
+    folderSort = sortSel.value;
+    renderSavedList();
+  });
+}
+function init() {
+  wireStatic();
+  buildStaticGroups();
+  syncSaveBtn();
+  var partsJob = Promise.all([loadTrimmed("assets/cost-emblem.webp"), loadTrimmed("assets/symbol-gem.webp"), loadArtImage("assets/soul-core.png")]).then(function (r) {
+    parts = {
+      emblem: r[0],
+      gem: r[1],
+      soul: r[2]
+    };
+  }).catch(function () {
+    showError("テンプレート素材の読み込みに失敗しました");
+  });
+  var dataJob = openDb().then(function () {
+    return purgeStarterData();
+  }).then(function () {
+    return listCardsDb();
+  }).then(function (rows) {
+    savedCards = rows;
+    if (rows.length > 0) {
+      spec = specFromRow(rows[0]);
+      editingId = rows[0].id;
+      dirty = false;
+    }
+  }).catch(function (e) {
+    showError("端末内データの読み込みに失敗しました: " + String(e));
+  });
+  Promise.all([partsJob, dataJob]).then(function () {
+    renderAll();
+    refreshArt();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        folderThumbCache.clear();
+        renderPreview();
+        renderSavedList();
+      });
+    }
+  });
+}
+init();</script>
+
+
+</body></html>
